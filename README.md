@@ -1,6 +1,6 @@
 mathematics: Metric,quantum mechanics,  (Heisenberg)
 physics:  meter, (Spengler)
 neuroscience: chaos,probability, (庄子)
-psychology: psychanalysis, (Freud)
+psychology: psychanalysis, 3D (Freud)
 biology: evolutionism (Darwin)
 philosophy: power will (Nietzsche) 
