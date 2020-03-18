@@ -14,5 +14,8 @@
     "matter-js": "^0.14.2",
     "ml5": "^0.5.0",
     "prob.js": "^1.0.6"
+  },
+  "devDependencies": {
+    "three": "^0.114.0"
   }
 }
