@@ -1,4 +1,6 @@
-import * as Six from './metric'
+import * as mathematics from './metric'
 import { runRender } from './physics'
-new Six.Metric()
+import { r } from './neuroscience'
+new mathematics.Metric()
 runRender()
+console.log(r())
