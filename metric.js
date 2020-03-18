@@ -1,5 +1,5 @@
-/* mathematics: Metric,  (Heisenberg)
-physics:  quantum mechanics, (Heisenberg)
+/* mathematics: Metric,quantum mechanics,  (Heisenberg)
+physics:  meter, (Spengler)
 neuroscience: chaos, (庄子)
 psychology: psychanalysis, (Freud)
 biology: evolutionism (Darwin)
