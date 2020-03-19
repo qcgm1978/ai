@@ -1,4 +1,4 @@
-import * as mathematics from './metric'
+import * as mathematics from './mathematics'
 import { runRender } from './physics'
 import { r } from './neuroscience'
 import { init, animate } from './psychanalysis'

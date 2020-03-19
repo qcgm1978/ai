@@ -1,6 +1,6 @@
 
 
-import * as tf from '@tensorflow/tfjs'
+require('@tensorflow/tfjs-node'); const tf = require('@tensorflow/tfjs')
 class Metric {
     constructor() {
         const x = tf.tensor2d(
@@ -28,4 +28,12 @@ class Metric {
         precision.print();
     }
 }
-export { Metric }
+class Exponential {
+    constructor(x) {
+        this.x = tf.tensor1d(x)
+    }
+    getResult() {
+        return tf.exp(this.x).dataSync()
+    }
+}
+module.exports = { Metric, Exponential }
