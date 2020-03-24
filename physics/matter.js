@@ -27,4 +27,10 @@ Engine.run(engine);
 
 // run the renderer
 const runRender = () => Render.run(render);
-export { runRender }
+// Spontaneous order
+const SpontaneousOrder = class {
+    constructor() {
+
+    }
+}
+export { runRender, SpontaneousOrder }
