@@ -1,5 +1,6 @@
 const neuro = require('../neuroscience')
 const math = require('../mathematics')
+const { Parent, Child } = require('../physics/structure')
 const { Weather } = require('../physics/weather')
 // const chaos = require('../physics/chaos')
 it(`Chaos: When the present determines the future, but the approximate present does not approximately determine the future.
@@ -19,4 +20,12 @@ it(`0.506127 printed as 0.506`, () => {
   expect(weather.hasRain).toBeFalsy()
   expect(weather.getLongTermPrediction()).toBeTruthy()
   expect(weather.getRoundErr(0.175)).toBe(.17)
+});
+it(`Mathematical objects are exhaustively defined by their place in such structures`, () => {
+  const parent = new Parent()
+  expect(parent.isChild).toBeFalsy()
+  const child = new Child(1)
+  expect(child.isChild).toBeTruthy()
+  expect(child.hasOrder).toBeTruthy()
+  expect(new Child(0).hasOrder).toBeFalsy()
 });
