@@ -3,12 +3,14 @@ class Weather {
     constructor(num) {
         this.num = num
     }
+    // on any scale the proportion of noise-containing periods to error-free periods was a constant – thus errors were inevitable and must be planned for by incorporating redundancy
+    NoiseConstant = 3
     hasRain = false
     getNum() {
         return +(this.num).toFixed(3)
     }
     getLongTermPrediction() {
-        return this.countDecimals(this.getNum(this.num)) <= 3 ? !this.hasRain : this.hasRain
+        return this.countDecimals(this.getNum(this.num)) <= this.NoiseConstant ? !this.hasRain : this.hasRain
     }
     countDecimals(value) {
         if (Math.floor(value) === value) return 0;
