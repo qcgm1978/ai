@@ -18,4 +18,5 @@ it(`0.506127 printed as 0.506`, () => {
   expect(weather.getNum()).toBe(0.506)
   expect(weather.hasRain).toBeFalsy()
   expect(weather.getLongTermPrediction()).toBeTruthy()
+  expect(weather.getRoundErr(0.175)).toBe(.17)
 });

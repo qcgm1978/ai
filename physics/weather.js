@@ -3,14 +3,22 @@ class Weather {
     constructor(num) {
         this.num = num
     }
-    // on any scale the proportion of noise-containing periods to error-free periods was a constant – thus errors were inevitable and must be planned for by incorporating redundancy
-    NoiseConstant = 3
+    // deterministic laws that are highly sensitive to initial conditions
+    ini = {
+
+        // on any scale the proportion of noise-containing periods to error-free periods was a constant – thus errors were inevitable and must be planned for by incorporating redundancy
+        UniversalBg: 3
+    }
     hasRain = false
+    //  rounding errors in numerical computation, can yield widely diverging outcomes for such dynamical systems
+    getRoundErr(x) {
+        return +x.toFixed(2)
+    }
     getNum() {
         return +(this.num).toFixed(3)
     }
     getLongTermPrediction() {
-        return this.countDecimals(this.getNum(this.num)) <= this.NoiseConstant ? !this.hasRain : this.hasRain
+        return this.countDecimals(this.getNum(this.num)) <= this.ini.UniversalBg ? !this.hasRain : this.hasRain
     }
     countDecimals(value) {
         if (Math.floor(value) === value) return 0;
