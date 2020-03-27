@@ -1,4 +1,5 @@
 const tf = require('@tensorflow/tfjs')
+const { r, Chaos } = require('../neuron/neuroscience')
 it(`added a Dense layer(Fully connected) with only single neuron. `, () => {
     const model = tf.sequential();
     model.add(tf.layers.dense({ units: 1, inputShape: [1] }));
@@ -14,4 +15,11 @@ it(`added a Dense layer(Fully connected) with only single neuron. `, () => {
     xs = tf.tensor1d([2, 5, 8, 11, 14, 17, 20, 23, 26, 27], 'int32');
     expect(xs.rankType).toEqual('1')
     expect(tf.tensor2d([[1, 2], [3, 4]]).rankType).toBe('2')
+});
+it(`Most neurons receive signals via the dendrites and soma and send out signals down the axon.`, () => {
+    const chaos = new Chaos()
+    expect(chaos.axon()).toBe('axon')
+    expect(chaos.signal).toBe('')
+    chaos.dendrite('new signal')
+    expect(chaos.signal).toBe('new signal')
 });

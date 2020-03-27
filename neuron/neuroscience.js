@@ -5,9 +5,17 @@ class Chaos {
     constructor(num) {
         this.num = num;
     }
+    signal = ''
     getResult() {
         Chaos.ini = !Chaos.ini
         return Chaos.ini
+    }
+    // At the majority of synapses, signals cross from the axon of one neuron to a dendrite of another. 
+    axon() {
+        return 'axon'
+    }
+    dendrite(signal) {
+        this.signal = signal
     }
 }
 Chaos.ini = true
