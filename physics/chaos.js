@@ -37,13 +37,19 @@ data.forEach(item => {
 nn.normalizeData();
 
 // Step 6: train your neural network
+//  how much uncertainty can be tolerated in the forecast, how accurately its current state can be measured, and a time scale depending on the dynamics of the system, called the Lyapunov time
+const LyapunovTime = 32
 const trainingOptions = {
-    epochs: 32,
+    epochs: LyapunovTime,
     batchSize: 12
 }
-nn.train(trainingOptions, finishedTraining);
+// nn.train(trainingOptions, finishedTraining);
+nn.train(trainingOptions, whileTraining, finishedTraining);
 
 // Step 7: use the trained model
+function whileTraining(epoch, loss) {
+    console.log(`epoch: ${epoch}, loss:${JSON.stringify(loss)}`);
+}
 function finishedTraining() {
     classify();
 }
