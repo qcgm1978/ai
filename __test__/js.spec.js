@@ -1,4 +1,4 @@
-const neuro = require('../neuroscience')
+const neuro = require('../neuron/neuroscience')
 const math = require('../mathematics')
 const { Parent, Child } = require('../physics/structure')
 const { Weather } = require('../physics/weather')
