@@ -23,3 +23,9 @@ it(`Most neurons receive signals via the dendrites and soma and send out signals
     chaos.dendrite('new signal')
     expect(chaos.signal).toBe('new signal')
 });
+it(` If the voltage changes by a large enough amount over a short interval, the neuron generates an all-or-nothing electrochemical pulse called an action potential.`, () => {
+    const chaos = new Chaos()
+    expect(chaos.ini.netVoltage).toBe(3.5)
+    expect(chaos.excitatory()).toBe(4.5)
+    expect(chaos.inhibitory()).toBe(3.5)
+});
