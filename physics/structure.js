@@ -13,4 +13,15 @@ class Child extends Parent {
     isChild = true
     hasOrder = this.num ? this.hasOrder : false
 }
-module.exports = { Parent, Child }
+//  local interactions among the components themselves
+class Another {
+    constructor() {
+        if (typeof Parent !== 'undefined') {
+            this.interact()
+        }
+    }
+    interact() {
+        this.isChild = Parent.Child
+    }
+}
+module.exports = { Parent, Child, Another }
