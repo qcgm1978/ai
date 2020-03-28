@@ -1,6 +1,6 @@
 const neuro = require('../neuron/neuroscience')
 const math = require('../mathematics')
-let { Parent, Child, Another } = require('../physics/structure')
+let { Parent, Child, Another, NanoStructure } = require('../physics/structure')
 const { Weather } = require('../physics/weather')
 // const chaos = require('../physics/chaos')
 it(`Chaos: When the present determines the future, but the approximate present does not approximately determine the future.
@@ -41,4 +41,6 @@ it(`Self-assembly is a process in which a disordered system of pre-existing comp
   Another.freeEnergy = 10
   const another3 = new Another(Parent)
   expect(another3.interactCount).toBe(5)
+  expect(another3.isStrongState).toBeTruthy()
+  expect(NanoStructure.isExist).toBeTruthy()
 });

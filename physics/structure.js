@@ -1,3 +1,7 @@
+// that can drive self-assembly is entropy maximization
+class Entropy {
+    entropyMaximization = true
+}
 class Parent {
     constructor(num) {
         this.num = num
@@ -15,13 +19,19 @@ class Child extends Parent {
     hasOrder = this.num ? this.hasOrder : false
 }
 //  local interactions among the components themselves
-class Another {
+class Another extends Entropy {
     constructor(interactClass) {
+        super()
         if (interactClass.interact) {
             const freeEnergy = interactClass.interact
             for (let i = 0; i < freeEnergy; i++) {
 
                 this.interact()
+                this.strongBound()
+                if (this.entropyMaximization) {
+
+                    NanoStructure.isExist = true
+                }
             }
         } else {// reversible organization of molecular units into ordered structures
             Another.freeEnergy = this.freeEnergy
@@ -29,12 +39,25 @@ class Another {
     }
     freeEnergy = 10
     interactCount = 0
+    isStrongState = false
     interact() {
         if (Another.freeEnergy) {
             this.interactCount++
             Another.freeEnergy--
         }
     }
+    // this organization may be transferred into strongly-bound covalent systems
+    strongBound() {
+        this.isStrongState = true
+    }
 }
 Another.freeEnergy = 10
-module.exports = { Parent, Child, Another }
+// Self-assembled nano-structure
+class NanoStructure {
+    constructor() {
+
+    }
+}
+NanoStructure.isExist = false
+
+module.exports = { Parent, Child, Another, NanoStructure }
