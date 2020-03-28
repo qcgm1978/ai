@@ -32,5 +32,9 @@ it(`Mathematical objects are exhaustively defined by their place in such structu
 it(`Self-assembly is a process in which a disordered system of pre-existing components forms an organized structure or pattern without external direction`, () => {
   const parent = new Parent()
   const another = new Another()
-  expect(another.isChild).toBeFalsy()
+  const another1 = new Another()
+  const another2 = new Another()
+  expect(another.interactCount).toBe(5)
+  expect(another1.interactCount).toBe(5)
+  expect(another2.interactCount).toBe(0)
 });

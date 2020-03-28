@@ -6,6 +6,7 @@ class Parent {
     // the self-assembled structure must have a higher order than the isolated components,
     hasOrder = true
 }
+Parent.interact = 5
 class Child extends Parent {
     constructor(num) {
         super(num)
@@ -17,11 +18,20 @@ class Child extends Parent {
 class Another {
     constructor() {
         if (typeof Parent !== 'undefined') {
-            this.interact()
+            const freeEnergy = Parent.interact
+            for (let i = 0; i < freeEnergy; i++) {
+
+                this.interact()
+            }
         }
     }
+    interactCount = 0
     interact() {
-        this.isChild = Parent.Child
+        if (Another.freeEnergy) {
+            this.interactCount++
+            Another.freeEnergy--
+        }
     }
 }
+Another.freeEnergy = 10
 module.exports = { Parent, Child, Another }
