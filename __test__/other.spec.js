@@ -1,6 +1,6 @@
 const neuro = require('../neuron/neuroscience')
 const math = require('../mathematics')
-const { Parent, Child, Another } = require('../physics/structure')
+let { Parent, Child, Another } = require('../physics/structure')
 const { Weather } = require('../physics/weather')
 // const chaos = require('../physics/chaos')
 it(`Chaos: When the present determines the future, but the approximate present does not approximately determine the future.
@@ -30,11 +30,15 @@ it(`Mathematical objects are exhaustively defined by their place in such structu
   expect(new Child(0).hasOrder).toBeFalsy()
 });
 it(`Self-assembly is a process in which a disordered system of pre-existing components forms an organized structure or pattern without external direction`, () => {
-  const parent = new Parent()
-  const another = new Another()
-  const another1 = new Another()
-  const another2 = new Another()
+  const another = new Another(Parent)
+  const another1 = new Another(Parent)
+  const another2 = new Another(Parent)
   expect(another.interactCount).toBe(5)
   expect(another1.interactCount).toBe(5)
   expect(another2.interactCount).toBe(0)
+  expect(Another.freeEnergy).toBe(0)
+  // Parent.interact = 5
+  Another.freeEnergy = 10
+  const another3 = new Another(Parent)
+  expect(another3.interactCount).toBe(5)
 });

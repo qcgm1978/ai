@@ -16,15 +16,18 @@ class Child extends Parent {
 }
 //  local interactions among the components themselves
 class Another {
-    constructor() {
-        if (typeof Parent !== 'undefined') {
-            const freeEnergy = Parent.interact
+    constructor(interactClass) {
+        if (interactClass.interact) {
+            const freeEnergy = interactClass.interact
             for (let i = 0; i < freeEnergy; i++) {
 
                 this.interact()
             }
+        } else {// reversible organization of molecular units into ordered structures
+            Another.freeEnergy = this.freeEnergy
         }
     }
+    freeEnergy = 10
     interactCount = 0
     interact() {
         if (Another.freeEnergy) {
