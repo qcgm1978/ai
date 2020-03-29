@@ -31,4 +31,5 @@ class ActionPotential {
     getRefractory() { }
 }
 
-export { ActionPotential }
+module.exports = { ActionPotential }
+// export { ActionPotential }
