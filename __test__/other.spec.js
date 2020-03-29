@@ -43,4 +43,5 @@ it(`Self-assembly is a process in which a disordered system of pre-existing comp
   expect(another3.interactCount).toBe(5)
   expect(another3.isStrongState).toBeTruthy()
   expect(NanoStructure.isExist).toBeTruthy()
+  expect(new NanoStructure().isMacroscopicSize).toBeTruthy()
 });

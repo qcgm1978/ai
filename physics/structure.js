@@ -22,8 +22,9 @@ class Child extends Parent {
 class Another extends Entropy {
     constructor(interactClass) {
         super()
-        if (interactClass.interact) {
+        if (interactClass.interact && this.isFieldDirected) {
             const freeEnergy = interactClass.interact
+            //Avoiding one-at-a-time approaches
             for (let i = 0; i < freeEnergy; i++) {
 
                 this.interact()
@@ -39,6 +40,8 @@ class Another extends Entropy {
     }
     freeEnergy = 10
     interactCount = 0
+    //  field-directed assembly
+    isFieldDirected = true
     isStrongState = false
     interact() {
         if (Another.freeEnergy) {
@@ -55,7 +58,9 @@ Another.freeEnergy = 10
 // Self-assembled nano-structure
 class NanoStructure {
     constructor() {
-
+        if (NanoStructure.isExist) {
+            this.isMacroscopicSize = true
+        }
     }
 }
 NanoStructure.isExist = false
