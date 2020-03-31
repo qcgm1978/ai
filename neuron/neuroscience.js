@@ -1,5 +1,3 @@
-const Prob = require('prob.js')
-var r = Prob.normal(0, 1.0); // μ = 0, σ = 1.0 
 
 class Chaos {
     constructor(num) {
@@ -31,4 +29,4 @@ class Chaos {
 
 }
 Chaos.ini = true
-module.exports = { r, Chaos }
+module.exports = { Chaos }
