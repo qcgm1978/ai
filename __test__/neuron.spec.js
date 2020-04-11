@@ -40,4 +40,5 @@ it(`Connectionism presents a cognitive theory based on simultaneously occurring,
     connect.learn(2)
     expect(connect['weight_2']).toBe(0)
     expect(connect['weight_1']).toBeGreaterThan(connect['weight_2'])
+    expect(connect.activation).toBe(.1)
 });
