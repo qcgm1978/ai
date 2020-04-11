@@ -1,5 +1,6 @@
 const tf = require('@tensorflow/tfjs')
 const { r, Chaos } = require('../neuron/neuroscience')
+const { Connectionism } = require('../neuron/connectionism')
 it(`added a Dense layer(Fully connected) with only single neuron. `, () => {
     const model = tf.sequential();
     model.add(tf.layers.dense({ units: 1, inputShape: [1] }));
@@ -28,4 +29,15 @@ it(` If the voltage changes by a large enough amount over a short interval, the 
     expect(chaos.ini.netVoltage).toBe(3.5)
     expect(chaos.excitatory()).toBe(4.5)
     expect(chaos.inhibitory()).toBe(3.5)
+});
+it(`Connectionism presents a cognitive theory based on simultaneously occurring, distributed signal activity via connections that can be represented numerically`, () => {
+    const connect = new Connectionism()
+    connect.learn(1)
+    expect(connect['weight_1']).toBe(0)
+    connect.learn(1)
+
+    expect(connect['weight_1']).toBe(.1);
+    connect.learn(2)
+    expect(connect['weight_2']).toBe(0)
+    expect(connect['weight_1']).toBeGreaterThan(connect['weight_2'])
 });
