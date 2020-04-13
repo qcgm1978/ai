@@ -40,9 +40,15 @@ const takeNNTask = () => {
     nn.normalizeData();
 
     // Step 6: train your neural network
+    const batchSize = 12;
+    console.log(`batchSize: Any mental state can be described as an (N)-dimensional vector of numeric activation values over neural units in a network.`)
+    const epochs = 32;
+    console.log(`epochs: Memory is created by modifying the strength of the connections between neural units. The connection strengths, or "weights", are generally represented as an N×N matrix.
+`)
     const trainingOptions = {
-        epochs: 32,
-        batchSize: 12
+        epochs,
+        batchSize
+
     }
     nn.train(trainingOptions, finishedTraining);
 
