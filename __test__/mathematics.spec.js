@@ -1,5 +1,14 @@
 const math = require('../mathematics/metric-exponential')
-const { r } = require('../mathematics/probability')
+const { r, Probability } = require('../mathematics/probability')
+const prob = new Probability()
+it(` Probability is a number between 0 and 1`, () => {
+    const num = prob.getAProb()
+    expect(num).toBeGreaterThan(0).toBeLessThan(1)
+});
+it(`probabilities can be numerically described by the number of desired outcomes divided by the total number of all outcomes`, () => {
+    const result = prob.calcProb(1, 4)
+    expect(result).toBe(.25)
+});
 it(``, () => {
     expect(r()).toBeLessThan(2).toBeGreaterThan(-2)
 });
