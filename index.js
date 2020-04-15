@@ -6,13 +6,13 @@
 // import { ActionPotential } from './neuron/action-potential'
 // import './neuron/classification'
 import { takeNNTask } from './neuron/neuron-network'
-// import { init, animate } from './psychanalysis'
+import { init, animate } from './psychology/psychanalysis'
 // import { network } from './biology'
 // import { quote } from './philosophy'
 // new mathematics.Metric()
 // runRender()
-// init();
-// animate();
+init();
+animate();
 // console.log(network.activate([1, 1])); // 0.9824...
 // console.log(quote)
 takeNNTask();
