@@ -1,7 +1,13 @@
 const neuro = require('../neuron/neuroscience')
 let { Parent, Child, Another, NanoStructure } = require('../physics/structure')
 const { Weather } = require('../physics/weather')
+const { Landlords } = require('../mathematics/game')
 const { getId, getSigma, getCheckCode } = require('../mathematics/other')
+it(``, () => {
+  const landLords = new Landlords()
+  const stategy = landLords.ending.setThreeCards()
+  expect(stategy).toEqual([null, 3333, [13, 13], 4])
+});
 it(``, () => {
   const id = getId(6);
   expect(id.map(item => item.idc)).toContain('211226194010130216')
