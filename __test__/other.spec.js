@@ -1,7 +1,16 @@
 const neuro = require('../neuron/neuroscience')
 let { Parent, Child, Another, NanoStructure } = require('../physics/structure')
 const { Weather } = require('../physics/weather')
-// const chaos = require('../physics/chaos')
+const { getId, getSigma, getCheckCode } = require('../mathematics/other')
+it(``, () => {
+  const id = getId(6);
+  expect(id.map(item => item.idc)).toContain('211226194010130216')
+  const oneId = '21122619780326021'
+  const num = getSigma(oneId)
+  expect(num).toBe(247)
+  expect(getCheckCode(oneId)).toBe(7)
+
+});
 it(`Chaos: When the present determines the future, but the approximate present does not approximately determine the future.
 `, () => {
   const ins = new neuro.Chaos()
