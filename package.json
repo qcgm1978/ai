@@ -5,7 +5,8 @@
   "main": "class.js",
   "scripts": {
     "test": "jest --watch --silent",
-    "start": "vue serve"
+    "start": "vue serve",
+    "git": "git config --global user.name \"Philipp\""
   },
   "keywords": [],
   "author": "",
