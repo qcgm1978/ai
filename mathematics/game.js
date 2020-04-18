@@ -86,6 +86,20 @@ class DoubleEggs {
 
         }
     }
+    recursiveLens = []
+    recursive(floors, eggs, arr = []) {
+        if (floors === 1) {
+            return arr
+        }
+        for (let k = 1; k <= floors; k++) {
+            const broken = this.recursive(k, eggs - 1, arr.concat([k]))
+            const notBroken = this.recursive(floors - k, eggs, arr.concat([k]))
+            const max = broken.length > notBroken.length ? broken : notBroken
+            this.recursiveLens.push(max)
+
+        }
+        return this.recursiveLens
+    }
     getEvenlyNum(partNum, times = Math.ceil(this.max / partNum)) {
         let maxParts = 0
         if (this.num === 2) {

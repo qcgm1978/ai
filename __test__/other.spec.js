@@ -15,6 +15,7 @@ it(``, () => {
   expect(doubleEggs.getFirstEggFloors()).toEqual([14, 27, 39, 50, 60, 69, 77, 84, 90, 95, 99, 100])
   expect(doubleEggs.getNotEvenlyNum()).toEqual(12)
   expect(doubleEggs.getNotEvenlyNum(2)).toEqual(14)
+  expect(doubleEggs.recursive(2, 2)).toEqual()
 });
 it(``, () => {
   const landLords = new Landlords()
