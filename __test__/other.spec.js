@@ -1,12 +1,17 @@
 const neuro = require('../neuron/neuroscience')
 let { Parent, Child, Another, NanoStructure } = require('../physics/structure')
 const { Weather } = require('../physics/weather')
-const { Landlords } = require('../mathematics/game')
+const { Landlords, DoubleEggs } = require('../mathematics/game')
 const { getId, getSigma, getCheckCode } = require('../mathematics/other')
 it(``, () => {
+  const doubleEggs = new DoubleEggs({ floors: 100 })
+  const max = doubleEggs.getMax()
+  expect(max).toBe(100)
+});
+it(``, () => {
   const landLords = new Landlords()
-  const stategy = landLords.ending.setThreeCards()
-  expect(stategy).toEqual([null, 3333, [13, 13], 4])
+  // const stategy = landLords.setThreeCards()
+  // expect(stategy.order).toEqual([null, 3333, [13, 13], 4])
 });
 it(``, () => {
   const id = getId(6);
