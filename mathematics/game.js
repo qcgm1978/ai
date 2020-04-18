@@ -63,18 +63,37 @@ class Landlords {
     }
 }
 class DoubleEggs {
-    constructor({ floors }) {
+    constructor({ floors, num = 2 }) {
         this.max = floors
+        this.num = num
     }
     getRange({ min, max }) {
         return [min, max - 1]
     }
-    getRemaining() {
-        const range = this.getRange()
-        return range[1] - rang[0]
+    getRemaining({ min, max }) {
+        const range = this.getRange({ min, max })
+        return range[1] - range[0]
     }
     getMax() {
         return this.max
     }
+    dichotomy(n, m = 0) {
+        if (n === 1) {
+            return m
+        } else {
+            return this.dichotomy(Math.ceil(n / 2), ++m)
+
+        }
+    }
+    getEvenlyNum(partNum, times = Math.ceil(this.max / partNum)) {
+        let maxParts = 0
+        if (this.num === 2) {
+            maxParts = times
+        }
+        const min = times * partNum
+        const secondEggNum = this.getRemaining({ min, max: min + partNum })
+        return maxParts + secondEggNum
+    }
+
 }
 module.exports = { Landlords, DoubleEggs }

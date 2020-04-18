@@ -7,6 +7,11 @@ it(``, () => {
   const doubleEggs = new DoubleEggs({ floors: 100 })
   const max = doubleEggs.getMax()
   expect(max).toBe(100)
+  const n = doubleEggs.dichotomy(100);
+
+  expect(n).toBe(7)
+  expect(doubleEggs.getEvenlyNum(10)).toBe(19)
+  expect(doubleEggs.getEvenlyNum(10, 2)).toBe(11)
 });
 it(``, () => {
   const landLords = new Landlords()
