@@ -95,7 +95,7 @@ class DoubleEggs {
         const secondEggNum = this.getRemaining({ min, max: min + partNum })
         return maxParts + secondEggNum
     }
-    getNotEvenlyNum(differ = 1, times = this.GaussSummationFormula(this.max)) {
+    getFirstEggFloors(differ = 1, times = this.GaussSummationFormula(this.max)) {
         let arr = []
         for (let i = times, m = 0; m < this.max; i--) {
             const n = m + i
@@ -104,13 +104,16 @@ class DoubleEggs {
             m = currentTestFloor
         }
         return arr
-        // let maxParts = 0
-        // if (this.num === 2) {
-        //     maxParts = times
-        // }
-        // const min = times * partNum
-        // const secondEggNum = this.getRemaining({ min, max: min + partNum })
-        // return maxParts + secondEggNum
+    }
+    getNotEvenlyNum(firstEggFloors) {
+        const firstEggFalls = this.getFirstEggFloors()
+        let maxFirstEgg = 0
+        if (this.num === 2) {
+            maxFirstEgg = firstEggFloors ? firstEggFloors : firstEggFalls.length
+        }
+        const min = firstEggFalls[maxFirstEgg - 2]
+        const secondEggNum = this.getRemaining({ min, max: firstEggFalls[maxFirstEgg - 1] })
+        return maxFirstEgg + secondEggNum
     }
     GaussSummationFormula(floors) {
         return math.ceil(math.parse('(-b + sqrt(b^2 - 4*a*c)) / (2*a)').compile().evaluate({
