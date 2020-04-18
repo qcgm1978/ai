@@ -12,6 +12,7 @@ it(``, () => {
   expect(n).toBe(7)
   expect(doubleEggs.getEvenlyNum(10)).toBe(19)
   expect(doubleEggs.getEvenlyNum(10, 2)).toBe(11)
+  expect(doubleEggs.getNotEvenlyNum()).toEqual([14, 27, 39, 50, 60, 69, 77, 84, 90, 95, 99, 100])
 });
 it(``, () => {
   const landLords = new Landlords()

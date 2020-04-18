@@ -1,3 +1,4 @@
+const math = require('mathjs')
 class Landlords {
     constructor() { }
     partner = [2, 3]
@@ -93,6 +94,32 @@ class DoubleEggs {
         const min = times * partNum
         const secondEggNum = this.getRemaining({ min, max: min + partNum })
         return maxParts + secondEggNum
+    }
+    getNotEvenlyNum(differ = 1, times = this.GaussSummationFormula(this.max)) {
+        let arr = []
+        for (let i = times, m = 0; m < this.max; i--) {
+            const n = m + i
+            const currentTestFloor = n <= this.max ? n : this.max
+            arr.push(currentTestFloor)
+            m = currentTestFloor
+        }
+        return arr
+        // let maxParts = 0
+        // if (this.num === 2) {
+        //     maxParts = times
+        // }
+        // const min = times * partNum
+        // const secondEggNum = this.getRemaining({ min, max: min + partNum })
+        // return maxParts + secondEggNum
+    }
+    GaussSummationFormula(floors) {
+        return math.ceil(math.parse('(-b + sqrt(b^2 - 4*a*c)) / (2*a)').compile().evaluate({
+            a: 1 / 2,
+            b: 1 / 2,
+            c: -100
+        }))
+
+        //  (n + 1) * n / 2>=100
     }
 
 }
