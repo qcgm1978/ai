@@ -1,4 +1,20 @@
 const tf = require('@tensorflow/tfjs')
+const { CommonSense } = require('../biology/common-sense')
+const { Landlords, DoubleEggs } = require('../mathematics/game')
+const { getId, getSigma, getCheckCode } = require('../mathematics/other')
+const common = new CommonSense()
+it(`Looking for a site's URL information`, () => {
+    expect(location.pathname).toBe('/')
+    expect(common.getUrl(location)).toBe("http://localhost/")
+    let m = 'https://developer.mozilla.org/path1/path2?query-str&str2#3';
+    let a = new URL(m);
+    expect(common.getUrl(a)).toBe(m).toBe(a.href)
+});
+it(`gravity`, () => {
+    const gravity = common.getGravity(1.989 * Math.pow(10, 30), 5.9736 * Math.pow(10, 24), 93.36 * Math.pow(10, 6))
+    expect(gravity.value).toBeCloseTo(1.3e40, -1e38)
+
+});
 it(`The first Dense layer has 128 nodes (or neurons). `, () => {
     expect(tf.layers.dense).toBeInstanceOf(Function)
     expect(tf.layers.dense({ name: 'dense', units: 128 }).getConfig().units).toEqual(128)

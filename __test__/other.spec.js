@@ -1,18 +1,9 @@
 const neuro = require('../neuron/neuroscience')
 let { Parent, Child, Another, NanoStructure } = require('../physics/structure')
 const { Weather } = require('../physics/weather')
-const { CommonSense } = require('../biology/common-sense')
 const { Landlords, DoubleEggs } = require('../mathematics/game')
 const { getId, getSigma, getCheckCode } = require('../mathematics/other')
-it(`Looking for a site's URL information`, () => {
-  const common = new CommonSense()
-  expect(location.pathname).toBe('/')
-  expect(common.getUrl(location)).toBe("http://localhost/")
-  let m = 'https://developer.mozilla.org/path1/path2?query-str&str2#3';
-  let a = new URL(m);
-  expect(common.getUrl(a)).toBe(m).toBe(a.href)
 
-});
 it(``, () => {
   const doubleEggs = new DoubleEggs({ floors: 100 })
   const max = doubleEggs.getMax()
