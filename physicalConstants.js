@@ -1,5 +1,5 @@
 'use strict'
-const lazy = require('./object').lazy
+const lazy = require('./biology/object').lazy
 
 function factory(type, config, load, typed, math) {
     // helper function to create a unit with a fixed prefix

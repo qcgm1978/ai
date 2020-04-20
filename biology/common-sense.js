@@ -1,5 +1,5 @@
 const math = require('mathjs')
-const constants = require('./physicalConstants')
+require('../physicalConstants')
 class ToiletPaperWidth {
     constructor(config = {}) {
         const defaults = { section: 0, sectionLen: 0, R: 0, r: 0, thickness: 0, unit: 'mm' }
