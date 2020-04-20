@@ -10,16 +10,32 @@ class CommonSense {
     }
 }
 class Drawback {
-    constructor(params = { laborIncome: 0, salary: [[0, 0]], hasHouseLoad: false, residence: false, isOnlyChild: false }) {
+    constructor(params = {}) {
+        const ini = { laborIncome: 0, salary: [[0, 0]], hasHouseLoad: false, residence: false, isOnlyChild: false }
+        params = { ...ini, ...params }
         for (let p in params) {
             this[p] = params[p]
         }
     }
     monthZeroBracketAmount = .5
+    laborTaxRate = .8
     salaryTaxRange = [[3.6, .03], [14.4, .1], [42, .2], [66, .25], [96, .35], [Infinity, .45]]
     laborTaxRange = [[0, .08, _ => 0], [.08, .4, income => income - .08], [.4, Infinity, income => income * .8]]
-    getDrawback() {
+    getTotalDrawback() {
+        const totalSalary = this.getTotalSalary()
+        const totalLaborIncome = this.laborIncome * this.laborTaxRate
+        const payableTax = this.getTax(totalSalary + totalLaborIncome)
+        const actualWithhold = this.getActualWithhold() + this.getLaborServiceTax()
+        return +(payableTax - actualWithhold).toFixed(3)
+    }
+    getSalaryDrawback() {
         return this.getPayableWithhold() - this.getActualWithhold()
+    }
+    getLaborDrawback() {
+        return +(this.getPayableLaborWithhold() - this.getLaborServiceTax()).toFixed(3)
+    }
+    hasDrawback() {
+        return this.getTotalSalary() < 12 || (this.getSalaryDrawback() <= 400 && this.getSalaryDrawback() > 0) || (this.getLaborDrawback() <= 400 && this.getLaborDrawback() > 0)
     }
     getActualWithhold(salary = this.salary) {
         return +salary.reduce((acc, item) => {
@@ -40,9 +56,7 @@ class Drawback {
         }, 0).toFixed(3)
     }
     getPayableWithhold() {
-        const totalSalary = this.salary.reduce((acc, item) => {
-            return acc + item[0] * item[1]
-        }, 0)
+        const totalSalary = this.getTotalSalary()
         let current = totalSalary - this.monthZeroBracketAmount * 12
         return +this.salaryTaxRange.reduce((acc, it) => {
             if (current > 0) {
@@ -57,8 +71,25 @@ class Drawback {
             return acc
         }, 0).toFixed(3)
     }
-    getFinalSettlement() {
-        return this.accIncome - this.accExeption - this.accDeduct - this.getAccIncomeTax()
+    getPayableLaborWithhold(laborIncome = this.laborIncome) {
+
+        let current = laborIncome * this.laborTaxRate
+        return this.getTax(current)
+    }
+    getTax(total) {
+        total -= this.monthZeroBracketAmount * 12
+        return +this.salaryTaxRange.reduce((acc, it) => {
+            if (total > 0) {
+
+                if (total >= it[0]) {
+                    acc += it[0] * it[1]
+                } else {
+                    acc += total * it[1]
+                }
+                total -= it[0]
+            }
+            return acc
+        }, 0).toFixed(3)
     }
     getLaborTaxableIncome(income = this.laborIncome) {
         this.laborTaxRange.map((item) => {
@@ -68,8 +99,10 @@ class Drawback {
         }, 0)
         return +income.toFixed(2)
     }
-    getTotalSalary(total) {
-        return +(total - this.getLaborServiceTax(total)).toFixed(2)
+    getTotalSalary() {
+        return this.salary.reduce((acc, item) => {
+            return acc + item[0] * item[1]
+        }, 0)
     }
     getLaborServiceTax(income = this.laborIncome) {
         const taxableIncome = this.getLaborTaxableIncome(income)
@@ -87,21 +120,10 @@ class Drawback {
                 }
             }
             return acc
-        }, 0).toFixed(2)
+        }, 0).toFixed(3)
     }
-    getAccIncomeTax() {
-        return this.salary.reduce((acc, item) => {
-            return acc + item[0] * item[1]
-        }, 0)
-    }
-    getIncomeTax() {
-        const range = this.salaryTaxRange
-        const income = this.getTaxableIncome()
-        const tax = range.reduce((acc, item) => {
 
-        }, 0)
-        return tax
-    }
+
     getTaxableIncome() {
         return this.getConsolidatedIncomeTax() - this.getExemption() - this.getDeduct()
     }
@@ -132,7 +154,7 @@ class Drawback {
         return this.hasHouseLoad ? 1.2 : 0
     }
     getConsolidatedIncomeTax() {
-        return this.salary + this.getLaborServiceTax * .8 + this.remuneration * .8 * .7 + this.patent * .8
+        return this.salary + this.getLaborServiceTax * this.laborTaxRate + this.remuneration * .8 * .7 + this.patent * .8
     }
     getExemption() { }
 
