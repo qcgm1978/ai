@@ -1,14 +1,30 @@
 const tf = require('@tensorflow/tfjs')
-const { CommonSense } = require('../biology/common-sense')
+const { CommonSense, Drawback } = require('../biology/common-sense')
 const { Landlords, DoubleEggs } = require('../mathematics/game')
 const { getId, getSigma, getCheckCode } = require('../mathematics/other')
 const common = new CommonSense()
+it(``, () => {
+    const drawBack = new Drawback({ salary: [[1.5, 6], [1.5, 6]], laborIncome: .07 })
+    const withhold = drawBack.getActualWithhold()
+    expect(withhold).toBe(.696)
+    expect(drawBack.getActualWithhold([[1.5, 12]])).toBe(.948)
+    expect(drawBack.getPayableWithhold()).toBe(.948)
+    expect(drawBack.getDrawback()).toBe(.252)
+    expect(drawBack.getLaborTaxableIncome()).toBe(0)
+    expect(drawBack.getLaborTaxableIncome(.3)).toBe(.22)
+    expect(drawBack.getLaborTaxableIncome(.5)).toBe(.4)
+    expect(drawBack.getLaborServiceTax()).toBe(0)
+    expect(drawBack.getLaborServiceTax(2.5)).toBe(.4)
+    expect(drawBack.getLaborServiceTax(18)).toBe(5.06)
+    expect(drawBack.getTotalSalary(18)).toBe(12.94)
+});
 it(`Looking for a site's URL information`, () => {
     expect(location.pathname).toBe('/')
     expect(common.getUrl(location)).toBe("http://localhost/")
-    let m = 'https://developer.mozilla.org/path1/path2?query-str&str2#3';
-    let a = new URL(m);
-    expect(common.getUrl(a)).toBe(m).toBe(a.href)
+    const link = 'https://developer.mozilla.org/path1/path2?query-str=a&str2=b#3';
+    const url = new URL(link);
+    expect(common.getUrl(url)).toBe(link).toBe(url.href)
+    expect(['protocol', 'hostname', 'pathname', 'search', 'hash'].reduce((acc, item, index) => acc + url[item] + (index ? '' : '//'), '')).toBe(link).toBe(url.href)
 });
 it(`gravity`, () => {
     const gravity = common.getGravity(1.989 * Math.pow(10, 30), 5.9736 * Math.pow(10, 24), 93.36 * Math.pow(10, 6))
