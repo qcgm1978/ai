@@ -1,8 +1,13 @@
 const tf = require('@tensorflow/tfjs')
-const { CommonSense, Drawback } = require('../biology/common-sense')
+const { CommonSense, Drawback, ToiletPaperWidth } = require('../biology/common-sense')
 const { Landlords, DoubleEggs } = require('../mathematics/game')
 const { getId, getSigma, getCheckCode } = require('../mathematics/other')
 const common = new CommonSense()
+it(``, () => {
+    const toiletPaper = new ToiletPaperWidth({ section: 250, sectionLen: 114 })
+    const len = toiletPaper.calLength('m')
+    expect(len).toBe('28.5m')
+});
 it(`drawback`, () => {
     let drawBack = new Drawback({ salary: [[1.5, 6], [1.5, 6]] })
     const withhold = drawBack.getActualWithhold()

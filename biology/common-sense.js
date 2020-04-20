@@ -1,5 +1,17 @@
 const math = require('mathjs')
 const constants = require('./physicalConstants')
+class ToiletPaperWidth {
+    constructor({ section, sectionLen }) {
+        this.section = section
+        this.sectionLen = sectionLen
+    }
+    unit = 'mm'
+    calLength(unit) {
+        const len = this.section * this.sectionLen
+        return `${unit === 'm' ? len / 1000 : len}${unit}`
+    }
+
+}
 class CommonSense {
     constructor() { }
     getUrl(location) {
@@ -159,4 +171,4 @@ class Drawback {
     getExemption() { }
 
 }
-module.exports = { CommonSense, Drawback }
+module.exports = { CommonSense, Drawback, ToiletPaperWidth }
