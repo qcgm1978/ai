@@ -7,6 +7,9 @@ it(``, () => {
     const toiletPaper = new ToiletPaperWidth({ section: 250, sectionLen: 114 })
     const len = toiletPaper.calLength('m')
     expect(len).toBe('28.5m')
+    const toiletPaper1 = new ToiletPaperWidth({ R: 5.75, r: 2.1, thickness: .022, unit: 'cm' })
+    const len1 = toiletPaper1.calLength('m')
+    expect(len1).toBe('41m')
 });
 it(`drawback`, () => {
     let drawBack = new Drawback({ salary: [[1.5, 6], [1.5, 6]] })

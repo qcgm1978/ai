@@ -1,15 +1,29 @@
 const math = require('mathjs')
 const constants = require('./physicalConstants')
 class ToiletPaperWidth {
-    constructor({ section, sectionLen }) {
-        this.section = section
-        this.sectionLen = sectionLen
+    constructor(config = {}) {
+        const defaults = { section: 0, sectionLen: 0, R: 0, r: 0, thickness: 0, unit: 'mm' }
+        Object.assign(this, defaults, config)
     }
     unit = 'mm'
     calLength(unit) {
-        const len = this.section * this.sectionLen
-        return `${unit === 'm' ? len / 1000 : len}${unit}`
+        if (this.section) {
+
+            const len = this.section * this.sectionLen
+            return `${unit === 'm' ? len / 1000 : len}${unit}`
+        } else {
+            return this.calByArea()
+        }
     }
+    calByArea(unit = 'm') {
+        const areaByRadius = Math.PI * (this.R ** 2 - this.r ** 2)
+        const len = math.evaluate(`x=areaByRadius/thickness`, {
+            thickness: this.thickness,
+            areaByRadius
+        })
+        return (unit === 'm' ? len / (this.unit === 'cm' ? 100 : 1000) : len).toFixed(0) + unit
+    }
+
 
 }
 class CommonSense {
