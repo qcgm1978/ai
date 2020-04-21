@@ -5,22 +5,31 @@ class Hanoi {
     }
     step = 1
     steps = []
-    finalPillars = []
+    pillars = [0, 1, 2]
     move() {
         const pillars = this.getPillars()
-        if (pillars[0].length) {
-            const disc = pillars[0][0]
-            pillars[0] = [0]
-            this.steps.push([0])
-            pillars[2][0] = (disc)
-            this.steps[0].push(2)
+        switch (pillars[0].length) {
+            case 1:
 
+                this.steps.push([0, 2])
+                break;
+            case 2:
+                this.steps.push(...this.moveToTarget(2, 0))
+                break;
+            case 3:
+                const finalTarget = 2
+                this.steps.push(...this.moveToTarget(1, 0), [0, finalTarget], ...this.moveToTarget(finalTarget, 1))
+                break;
         }
-        this.finalPillars = pillars
         return this.steps
     }
+    moveToTarget(target = 2, current = 0) {
+        let transfer = this.pillars.find(item => item !== target && item !== current)
+
+        return ([[current, transfer], [current, target], [transfer, target]])
+    }
     getPillars() {
-        return [new Array(this.layers).fill(0).map((item, index) => index + 1).reverse(), [0], [0]]
+        return [new Array(this.layers).fill(0).map((item, index) => index).reverse(), [0], [0]]
     }
     getPillar({ pillar = 0, layer = 0 } = {}) {
         return this.getPillars()[pillar][layer]
