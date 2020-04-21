@@ -10,6 +10,7 @@ it(``, () => {
     expect(speedRation).toBeCloseTo(1.33)
     expect(speed).toBe('225408km/s')
     expect(angle).toBeCloseTo(43, 0)
+    expect(speedRation).toBeCloseTo(sinRatio)
     // const isEqual = light.isEqualRation()
     // expect(isEqual).toBeTruthy()
 });
