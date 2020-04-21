@@ -4,8 +4,23 @@ class Hanoi {
         this.layers = layers
     }
     step = 1
+    steps = []
+    finalPillars = []
+    move() {
+        const pillars = this.getPillars()
+        if (pillars[0].length) {
+            const disc = pillars[0][0]
+            pillars[0] = [0]
+            this.steps.push([0])
+            pillars[2][0] = (disc)
+            this.steps[0].push(2)
+
+        }
+        this.finalPillars = pillars
+        return this.steps
+    }
     getPillars() {
-        return [new Array(this.layers).fill(0).map((item, index) => index).reverse(), [], []]
+        return [new Array(this.layers).fill(0).map((item, index) => index + 1).reverse(), [0], [0]]
     }
     getPillar({ pillar = 0, layer = 0 } = {}) {
         return this.getPillars()[pillar][layer]
