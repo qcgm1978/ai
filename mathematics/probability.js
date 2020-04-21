@@ -27,6 +27,7 @@ class Stock {
     // 1: front side, 0: reverse side
     man = [1, 0]
     woman = [1, 0]
+    winFrontSideProb = [1 / 3, 2 / 5]
     getCard(human) {
         const random = math.trunc(random = math.random() * 10) % 2
         return human[random]
@@ -63,6 +64,11 @@ class Stock {
         )
         let str = math.string(simplify)
         return str
+    }
+    getWinCard() {
+        const prob = this.winFrontSideProb
+        const current = Prob.uniform(0, 1)
+        return (current > prob[0] && current < prob[1]) ? 1 : 0
     }
 }
 module.exports = { r, Probability, Stock }

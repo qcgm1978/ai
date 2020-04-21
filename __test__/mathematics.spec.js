@@ -6,6 +6,7 @@ it(``, () => {
     const stock = new Stock()
     const simplify = stock.getSimplifyFormula()
     expect(simplify).toBe("6 * x * y - 3 * (x + y) + 2 * y * x + 1")
+    expect(stock.getWinCard() + '').toMatch(/0|1/)
 });
 
 it(` Probability is a number between 0 and 1`, () => {
