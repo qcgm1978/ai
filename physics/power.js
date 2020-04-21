@@ -1,5 +1,14 @@
 const math = require('mathjs')
 require('../physicalConstants')
+class Friction {
+    constructor(config) {
+        const defaults = {
+            gravity: 0,
+
+        }
+        Object.assign(this, defaults, config)
+    }
+}
 class HarmonicMotion {
     constructor() { }
     getPeriod() {

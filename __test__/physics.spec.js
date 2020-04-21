@@ -1,4 +1,14 @@
 const { RainDrop, HarmonicMotion } = require('../physics/power')
+const { Light } = require('../physics/light')
+it(``, () => {
+    const light = new Light({ angle: 20 })
+    const speed = light.getSpeed()
+    const angle = light.getAngle()
+    expect(speed).toBe(225408)
+    expect(angle).toBeCloseTo(43, 0)
+    // const isEqual = light.isEqualRation()
+    // expect(isEqual).toBeTruthy()
+});
 it(``, () => {
     const harmonic = new HarmonicMotion()
     expect(harmonic.getPeriod()).toBeCloseTo(5067, 1)
