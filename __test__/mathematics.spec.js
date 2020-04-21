@@ -1,7 +1,14 @@
 const mathExp = require('../mathematics/metric-exponential')
-const { r, Probability, Stock } = require('../mathematics/probability')
+const { r, Probability, Stock, Gamble } = require('../mathematics/probability')
 const math = require('../mathematics/simplify')
 const prob = new Probability()
+it(``, () => {
+    const gamble = new Gamble({ principal: 100 })
+    expect(gamble.getGambleAwayProb(120)).toBe('16.7%')
+    expect(gamble.getGambleAwayProb(200)).toBe('50.0%')
+    expect(gamble.getGambleAwayProb(1000)).toBe('90.0%')
+    expect(gamble.getGambleAwayProb(Infinity)).toBe('100.0%')
+});
 it(``, () => {
     const stock = new Stock()
     const simplify = stock.getSimplifyFormula()

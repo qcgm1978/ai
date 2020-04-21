@@ -2,6 +2,15 @@ const math = require('./simplify')
 require('../physicalConstants')
 const Prob = require('prob.js')
 var r = Prob.normal(0, 1.0); // μ = 0, σ = 1.0 
+class Gamble {
+    constructor({ principal, winProb = .5 }) {
+        this.principal = principal
+        this.winProb = winProb
+    }
+    getGambleAwayProb(target) {
+        return this.winProb === .5 ? (((1 - this.principal / target) * 100).toFixed(1) + '%') : 'unknown'
+    }
+}
 class Probability {
     constructor() { }
     getAProb() {
@@ -71,4 +80,4 @@ class Stock {
         return (current > prob[0] && current < prob[1]) ? 1 : 0
     }
 }
-module.exports = { r, Probability, Stock }
+module.exports = { r, Probability, Stock, Gamble }
