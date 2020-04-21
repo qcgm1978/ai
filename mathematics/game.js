@@ -1,4 +1,16 @@
 const math = require('mathjs')
+class Hanoi {
+    constructor({ layers }) {
+        this.layers = layers
+    }
+    step = 1
+    getPillars() {
+        return [new Array(this.layers).fill(0).map((item, index) => index).reverse(), [], []]
+    }
+    getPillar({ pillar = 0, layer = 0 } = {}) {
+        return this.getPillars()[pillar][layer]
+    }
+}
 class Landlords {
     constructor() { }
     partner = [2, 3]
@@ -140,4 +152,4 @@ class DoubleEggs {
     }
 
 }
-module.exports = { Landlords, DoubleEggs }
+module.exports = { Landlords, DoubleEggs, Hanoi }
