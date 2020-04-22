@@ -1,7 +1,18 @@
 const mathExp = require('../mathematics/metric-exponential')
+const { Algorithm } = require('../mathematics/algorithm')
+const { OddFunction } = require('../mathematics/function')
 const { r, Probability, Stock, Gamble } = require('../mathematics/probability')
 const math = require('../mathematics/simplify')
 const prob = new Probability()
+it(``, () => {
+    const oddFunction = new OddFunction()
+    expect(-oddFunction.getFunctionVal(1)).toBe(oddFunction.getFunctionVal(-1)).toBe(1)
+});
+it(``, () => {
+    const algorithm = new Algorithm()
+    expect(algorithm.sucessiveDivision(104, 40)).toBe(8)
+    expect(algorithm.sucessiveDivision(40, 104)).toBe(8)
+});
 it(``, () => {
     const gamble = new Gamble({ principal: 100 })
     expect(gamble.getGambleAwayProb(120)).toBe('16.7%')
