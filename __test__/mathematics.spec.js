@@ -5,8 +5,8 @@ const { r, Probability, Stock, Gamble } = require('../mathematics/probability')
 const math = require('../mathematics/simplify')
 const prob = new Probability()
 it(``, () => {
-    const oddFunction = new OddFunction()
-    expect(-oddFunction.getFunctionVal(1)).toBe(oddFunction.getFunctionVal(-1)).toBe(1)
+    const oddFunction = new OddFunction({ relation: 2, arithmetic: 'divide' })
+    expect(-oddFunction.getFunctionVal(1)).toBe(oddFunction.getFunctionVal(-1)).toBe(.5)
 });
 it(``, () => {
     const algorithm = new Algorithm()
