@@ -1,34 +1,11 @@
+// var { Equation, Expression, parse } = require("algebra.js");
+// const nerdamer = require('nerdamer');
+// require('nerdamer/Algebra.js');
+// require('nerdamer/Calculus.js');
+// require('nerdamer/Solve.js');
 const math = require('mathjs')
 require('../physicalConstants')
-// var { Equation, Expression, parse } = require("algebra.js");
-const nerdamer = require('nerdamer/all');
 
-class Earth {
-    constructor() {
-
-    }
-    solve() {
-        const earthRadius = 6370.856e3
-        var sol = nerdamer.solveEquations(`M * m * ${math.gravitationConstant.value}/ ${earthRadius ** 2}=m * 9.8`, 'M');
-        return (sol.toString().split(',').map(item => eval(item)))[0];
-    }
-    getGravityByNewton() {
-        var expr = new parse(`${math.gravitationConstant.value} * M * m / ${earthRadius ** 2}`);
-        // var expr = new Expression("earthMass");
-        // expr = expr.subtract(3);
-        // expr = expr.multiply("objectMass");
-
-        return (expr);
-    }
-    getGravityByGravity() {
-        return new parse(`m * ${math.gravity.value}`)
-    }
-    getEquation() {
-        const expr = new Equation(this.getGravityByGravity(), this.getGravityByNewton())
-
-        return (expr);
-    }
-}
 class Friction {
     constructor(config) {
         const defaults = {
@@ -106,4 +83,4 @@ class RainDrop {
         return +(this.m * math.gravity.value)
     }
 }
-module.exports = { RainDrop, HarmonicMotion, Earth }
+module.exports = { RainDrop, HarmonicMotion }
