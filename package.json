@@ -14,12 +14,14 @@
   "dependencies": {
     "@tensorflow/tfjs": "^1.7.0",
     "@tensorflow/tfjs-node": "^1.7.0",
+    "algebra.js": "^0.2.6",
     "echarts": "^4.7.0",
     "echarts-gl": "^1.1.1",
     "mathjs": "^6.6.4",
     "matter-js": "^0.14.2",
     "ml5": "^0.5.0",
     "neataptic": "^1.4.7",
+    "nerdamer": "^1.1.4",
     "prob.js": "^1.0.6"
   },
   "devDependencies": {
