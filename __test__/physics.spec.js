@@ -1,7 +1,11 @@
 const { RainDrop, HarmonicMotion } = require('../physics/power')
 const { Light } = require('../physics/light')
-
-
+// const { Atmosphere, Earth } = require('../physics/formula')
+it(``, () => {
+    // const earth = new Earth()
+    // const mass = earth.solve()
+    // expect(mass).toBeCloseTo(6e24, -23)
+});
 it(``, () => {
     const light = new Light({ angle: 20 })
     const speed = light.getSpeedWithUnit()

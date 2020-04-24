@@ -2,8 +2,16 @@ const mathExp = require('../mathematics/metric-exponential')
 const { Algorithm } = require('../mathematics/algorithm')
 const { OddFunction } = require('../mathematics/function')
 const { r, Probability, Stock, Gamble } = require('../mathematics/probability')
-const math = require('../mathematics/simplify')
+const { Logrithm } = require('../mathematics/logrithm')
 const prob = new Probability()
+it(``, () => {
+    const log = new Logrithm()
+    expect(log.getLog(3, 9)).toBeCloseTo(2)
+    expect(log.getLog(10, 1000)).toBeCloseTo(3)
+    expect(log.getLog(10, 10 ** 3)).toBeCloseTo(3 * log.getLog(10, 10)).toBeCloseTo(3)
+    expect(log.getLog(10, 1e5 / 1e2)).toBeCloseTo(log.getLog(10, 1e5) - log.getLog(10, 1e2)).toBeCloseTo(3)
+
+});
 it(``, () => {
     const oddFunction = new OddFunction({ relation: 2, arithmetic: 'divide' })
     expect(-oddFunction.getFunctionVal(1)).toBe(oddFunction.getFunctionVal(-1)).toBe(.5)
