@@ -4,6 +4,7 @@ class Fractal {
     BritishCoastline = 1.25
     SierpinskiTriangle = [3, 2]
     MandelbrotSet = 'f(x,c)=x^2+c'
+    iterCount = 10
     getDimension(count, ratio) {
         if (count instanceof Array) {
             ratio = count[1]
@@ -14,15 +15,15 @@ class Fractal {
     getSierpinskiTriangle() {
         return this.getDimension(this.SierpinskiTriangle)
     }
-    isMandelbrotSet({ coef, ini, arr, iterCount }) {
-        const ret = this.getMandelbrotSetNum({ coef, ini, arr, iterCount })
-        return ret.length === 10 && (ret[9] === ret[8])
+    isMandelbrotSet(config) {
+        const ret = this.getMandelbrotSetNum(config)
+        return ret.length === this.iterCount + 1 && (ret[10] === ret[9])
     }
     getMandelbrotSetNum(config = {}) {
         const def = { coef: 0, ini: 1, arr: isNaN(config.ini) ? [1] : [config.ini], iterCount: 0 }
         config = { ...def, ...config }
         const num = this.getMandelbrotSet(config)
-        if (num > 10 || config.iterCount > 10) {
+        if (num > 10 || config.iterCount >= this.iterCount) {
             return config.arr
         } else {
             config.arr.push(+num.toFixed(2))
