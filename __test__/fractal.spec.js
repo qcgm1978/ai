@@ -6,5 +6,8 @@ it(``, () => {
     expect(fractal.getDimension(4, 3)).toBeCloseTo(1.26)
     expect(fractal.getSierpinskiTriangle()).toBeCloseTo(1.58)
     // expect(fractal.getMandelbrotSet()).toBe(2)
-    expect(fractal.getMandelbrotSetNum(1)).toEqual([1, 2, 5])
+    expect(fractal.getMandelbrotSetNum({ coef: 1 })).toEqual([1, 2, 5])
+    expect(fractal.getMandelbrotSetNum({ coef: 1, ini: 0 })).toEqual([0, 1, 2, 5])
+    expect(fractal.getMandelbrotSetNum({ coef: -1, ini: 0 })).toEqual([0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0, -1,])
+    expect(fractal.getMandelbrotSetNum({ coef: -.1 })).toEqual([1, 0.9, 0.71, 0.4, 0.06, -0.1, -0.09, -0.09, -0.09, -0.09, -0.09, -0.09])
 });

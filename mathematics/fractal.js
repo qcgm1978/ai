@@ -14,21 +14,27 @@ class Fractal {
     getSierpinskiTriangle() {
         return this.getDimension(this.SierpinskiTriangle)
     }
-    getMandelbrotSetNum(coef = 0, ini = 1, arr = [ini]) {
-        const num = this.getMandelbrotSet(ini, coef)
-        if (num > 10) {
-            return arr
+    isMandelbrotSet({ coef, ini, arr, iterCount }) {
+        const ret = this.getMandelbrotSetNum({ coef, ini, arr, iterCount })
+        return ret.length === 10 && (ret[9] === ret[8])
+    }
+    getMandelbrotSetNum(config = {}) {
+        const def = { coef: 0, ini: 1, arr: isNaN(config.ini) ? [1] : [config.ini], iterCount: 0 }
+        config = { ...def, ...config }
+        const num = this.getMandelbrotSet(config)
+        if (num > 10 || config.iterCount > 10) {
+            return config.arr
         } else {
-            arr.push(num)
-            return this.getMandelbrotSetNum(coef, num, arr)
+            config.arr.push(+num.toFixed(2))
+            return this.getMandelbrotSetNum({ ...config, ini: num, iterCount: ++config.iterCount })
         }
     }
-    getMandelbrotSet(x, coef) {
+    getMandelbrotSet({ ini, coef }) {
         const parser = new math.parser()
 
         // define variables and functions
         parser.evaluate(this.MandelbrotSet)    // f(x, y)
-        return parser.evaluate(`f(${x}, ${coef})`)
+        return parser.evaluate(`f(${ini}, ${coef})`)
     }
 
 }
