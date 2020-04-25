@@ -5,12 +5,20 @@ const { r, Probability, Stock, Gamble } = require('../mathematics/probability')
 const { Logrithm } = require('../mathematics/logrithm')
 const prob = new Probability()
 it(``, () => {
-    const log = new Logrithm()
+    const goCount = Math.pow(3, 361)
+    const atomCount = Math.pow(10, 80)
+    const log = new Logrithm(goCount, atomCount)
     expect(log.getLog(3, 9)).toBeCloseTo(2)
     expect(log.getLog(10, 1000)).toBeCloseTo(3)
     expect(log.getLog(10, 10 ** 3)).toBeCloseTo(3 * log.getLog(10, 10)).toBeCloseTo(3)
     expect(log.getLog(10, 1e5 / 1e2)).toBeCloseTo(log.getLog(10, 1e5) - log.getLog(10, 1e2)).toBeCloseTo(3)
-
+    expect(log.getLog(10, 1e2 * 1e1)).toBeCloseTo(log.getLog(10, 1e2) + log.getLog(10, 1e1)).toBeCloseTo(3)
+    expect(log.getRatio())
+        .toBeCloseTo(Math.pow(10, log.getLog(10, goCount / atomCount)), -80)
+        .toBeCloseTo(Math.pow(10, log.getLog(10, goCount) - log.getLog(10, atomCount)), -80)
+        .toBeCloseTo(Math.pow(10, 361 * log.getLog(10, 3) - 80 * log.getLog(10, 10)), -80)
+        .toBeCloseTo(Math.pow(10, 361 * .48 - 80 * 1), -94)
+        .toBeCloseTo(Math.pow(10, 93.28), -94);
 });
 it(``, () => {
     const oddFunction = new OddFunction({ relation: 2, arithmetic: 'divide' })
