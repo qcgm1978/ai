@@ -11,4 +11,5 @@ it(``, () => {
     expect(fractal.getMandelbrotSetNum({ coef: -1, ini: 0 })).toEqual([0, -1, 0, -1, 0, -1, 0, -1, 0, -1, 0])
     expect(fractal.getMandelbrotSetNum({ coef: -.1 })).toEqual([1, 0.9, 0.71, 0.4, 0.06, -0.1, -0.09, -0.09, -0.09, -0.09, -0.09])
     expect(fractal.isMandelbrotSet({ coef: -.1 })).toBeTruthy()
+    expect(fractal.isMandelbrotSet({ coef: -1 })).toBeTruthy()
 });

@@ -17,7 +17,12 @@ class Fractal {
     }
     isMandelbrotSet(config) {
         const ret = this.getMandelbrotSetNum(config)
-        return ret.length === this.iterCount + 1 && (ret[10] === ret[9])
+        if (ret.length === this.iterCount + 1) {
+            const isVibrate = (ret[10] === ret[8] && ret[9] === ret[7])
+            const isConvergence = ret[10] === ret[9]
+            return isVibrate || isConvergence
+        }
+        return false
     }
     getMandelbrotSetNum(config = {}) {
         const def = { coef: 0, ini: 1, arr: isNaN(config.ini) ? [1] : [config.ini], iterCount: 0 }
