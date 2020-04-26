@@ -24,6 +24,15 @@ class Fractal {
         }
         return false
     }
+    isJuliaSet(config) {
+        const ret = this.getJuliaSet(config)
+        if (ret.length === this.iterCount + 1) {
+            const isVibrate = (ret[10] === ret[8] && ret[9] === ret[7])
+            const isConvergence = ret[10] === ret[9]
+            return isVibrate || isConvergence
+        }
+        return false
+    }
     getMandelbrotSetNum(config = {}) {
         const def = { coef: 0, ini: 1, arr: isNaN(config.ini) ? [1] : [config.ini], iterCount: 0 }
         config = { ...def, ...config }
@@ -31,8 +40,19 @@ class Fractal {
         if (num > 10 || config.iterCount >= this.iterCount) {
             return config.arr
         } else {
-            config.arr.push(+num.toFixed(2))
+            config.arr.push(isNaN(num) ? (`${math.re(num).toFixed(2)}+${math.im(num).toFixed(2)}i`) : +num.toFixed(2))
             return this.getMandelbrotSetNum({ ...config, ini: num, iterCount: ++config.iterCount })
+        }
+    }
+    getJuliaSet(config = {}) {
+        const def = { coef: 0, ini: 1, arr: isNaN(config.ini) ? [1] : [config.ini], iterCount: 0 }
+        config = { ...def, ...config }
+        const num = this.getMandelbrotSet(config)
+        if (num > 10 || config.iterCount >= this.iterCount) {
+            return config.arr
+        } else {
+            config.arr.push(isNaN(num) ? (`${math.re(num).toFixed(2)}+${math.im(num).toFixed(2)}i`) : +num.toFixed(2))
+            return this.getMandelbrotSetNum({ ...config, ini: ++config.ini, iterCount: ++config.iterCount })
         }
     }
     getMandelbrotSet({ ini, coef }) {
