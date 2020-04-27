@@ -8,6 +8,10 @@ it(``, () => {
     expect(quantum.getSpecicalRelativity({ v1: 1, v2: 2 })).toBeCloseTo(3)
     expect(quantum.getSpecicalRelativity({ v1: math.speedOfLight.value, v2: math.speedOfLight.value })).toBeCloseTo(math.speedOfLight.value)
     expect(quantum.getSpecicalRelativity.bind({ v1: math.speedOfLight.value, v2: 2 * math.speedOfLight.value })).toThrow()
+    expect(math.number(math.unit('52cm'), 'm')).toBe(.52)
+    expect(math.number(math.unit('1g'), 'kg')).toBe(.001)
+    expect(math.number(math.unit('1PJ'), 'joule')).toBe(1e15)
+    expect(quantum.getEnergy('1g')).toBeCloseTo(4.3)
 });
 it(``, () => {
     // const earth = new Earth()
