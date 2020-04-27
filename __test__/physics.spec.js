@@ -1,6 +1,14 @@
 const { RainDrop, HarmonicMotion } = require('../physics/power')
 const { Light } = require('../physics/light')
-// const { Atmosphere, Earth } = require('../physics/formula')
+const { Quantum } = require('../physics/quantum')
+const math = require('mathjs')
+require('../physicalConstants')
+it(``, () => {
+    const quantum = new Quantum()
+    expect(quantum.getSpecicalRelativity({ v1: 1, v2: 2 })).toBeCloseTo(3)
+    expect(quantum.getSpecicalRelativity({ v1: math.speedOfLight.value, v2: math.speedOfLight.value })).toBeCloseTo(math.speedOfLight.value)
+    expect(quantum.getSpecicalRelativity.bind({ v1: math.speedOfLight.value, v2: 2 * math.speedOfLight.value })).toThrow()
+});
 it(``, () => {
     // const earth = new Earth()
     // const mass = earth.solve()
