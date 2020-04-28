@@ -1,4 +1,6 @@
 const math = require('mathjs')
+const nerdamer = require('nerdamer');
+require('nerdamer/Solve.js')
 class CalculusSet extends Set {
     constructor({ conditions = [], interval = [-Infinity, Infinity] }) {
         super()
@@ -8,6 +10,14 @@ class CalculusSet extends Set {
     }
     temp = []
     universal = new Set()
+    getCenter() {
+        var sol = nerdamer.solveEquations([`x-y=${this.interval[0]}`, `x+y=${this.interval[1]}`]);
+        return sol[0][1];
+    }
+    getRadius() {
+        var sol = nerdamer.solveEquations([`x-y=${this.interval[0]}`, `x+y=${this.interval[1]}`]);
+        return sol[1][1];
+    }
     have(param) {
         // has the element
         const has = this.has(param)
@@ -18,6 +28,9 @@ class CalculusSet extends Set {
         // in the interval
         const inInterval = this.inInterval(param)
         return has || satisfyCondition || inInterval
+    }
+    isInfinite() {
+        return this.interval[0] === -Infinity || this.interval[1] === Infinity
     }
     complementary() {
         const arr = []

@@ -8,9 +8,15 @@ const e = new CalculusSet({ conditions: [3, 1, 2, 5, 6] })
 const f = new CalculusSet({ conditions: [] })
 it(`interval`, () => {
     const ins = new CalculusSet({ interval: [-1, 5], conditions: [-1] })
+    const ins1 = new CalculusSet({ interval: [-Infinity, 5], conditions: [-1] })
     expect(ins.have(0)).toBeTruthy()
     expect(ins.have(-1)).toBeTruthy()
+    expect(ins1.have(-100)).toBeTruthy()
     expect(ins.have(-1.1)).toBeFalsy()
+    expect(ins.isInfinite()).toBeFalsy()
+    expect(ins1.isInfinite()).toBeTruthy()
+    expect(ins.getCenter()).toBe(2)
+    expect(ins.getRadius()).toBe(3)
 
 });
 it(`calc`, () => {
