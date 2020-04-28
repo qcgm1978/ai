@@ -1,12 +1,24 @@
 const math = require('mathjs')
 class CalculusSet extends Set {
-    constructor({ conditions = [] }) {
+    constructor({ conditions = [], interval = [-Infinity, Infinity] }) {
         super()
         this.conditions = conditions
-        this.set = this.buildSet()
+        this.interval = interval
+        this.buildSet()
     }
     temp = []
     universal = new Set()
+    have(param) {
+        // has the element
+        const has = this.has(param)
+        // satisfy condition
+        const satisfyCondition = this.conditions.every(item => {
+            return item instanceof Function ? item(param) : false
+        })
+        // in the interval
+        const inInterval = this.inInterval(param)
+        return has || satisfyCondition || inInterval
+    }
     complementary() {
         const arr = []
         this.universal.forEach((value) => {
@@ -70,9 +82,6 @@ class CalculusSet extends Set {
         this.temp = []
         return ret
     }
-    hasElement(ele) {
-        return this.set.have(ele)
-    }
     isEmptySet() {
         return !!!this.size
     }
@@ -96,12 +105,15 @@ class CalculusSet extends Set {
         return this.hasSet(set)
     }
     buildSet() {
-        this.set = new Set()
-        this.set.have = (param) => this.conditions.every(item => item(param))
         this.addEle()
-        return (param, calc) => {
+        // get elements by conditions
+        return (param, calc = param => param) => {
             return this.conditions.every(item => item(param)) ? calc(param) : []
         }
+    }
+    inInterval(param) {
+
+        return param > this.interval[0] && param < this.interval[1]
     }
     addEle() {
         this.conditions.map(item => {

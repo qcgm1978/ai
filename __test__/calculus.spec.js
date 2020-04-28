@@ -6,6 +6,13 @@ const c = new CalculusSet({ conditions: [3, 6, 7] })
 const d = new CalculusSet({ conditions: [3, 1, 2, 5] })
 const e = new CalculusSet({ conditions: [3, 1, 2, 5, 6] })
 const f = new CalculusSet({ conditions: [] })
+it(`interval`, () => {
+    const ins = new CalculusSet({ interval: [-1, 5], conditions: [-1] })
+    expect(ins.have(0)).toBeTruthy()
+    expect(ins.have(-1)).toBeTruthy()
+    expect(ins.have(-1.1)).toBeFalsy()
+
+});
 it(`calc`, () => {
 
     a.setUniversal([1, 2, 3, 4, 5, 6])
