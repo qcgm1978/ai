@@ -2,14 +2,22 @@ const math = require('mathjs')
 const nerdamer = require('nerdamer');
 require('nerdamer/Solve.js')
 class CalculusSet extends Set {
-    constructor({ conditions = [], interval = [-Infinity, Infinity] }) {
+    constructor({ conditions = [], interval = [-Infinity, Infinity], except = [] }) {
         super()
         this.conditions = conditions
         this.interval = interval
+        this.except = except
         this.buildSet()
     }
     temp = []
     universal = new Set()
+    isDeletedNeighborhood() {
+        const center = this.getCenter()
+        return this.isNeighborhood() && this.except.includes(center)
+    }
+    isNeighborhood() {
+        return !isNaN(this.getCenter())
+    }
     getCenter() {
         var sol = nerdamer.solveEquations([`x-y=${this.interval[0]}`, `x+y=${this.interval[1]}`]);
         return sol[0][1];

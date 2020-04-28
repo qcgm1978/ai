@@ -8,6 +8,7 @@ const e = new CalculusSet({ conditions: [3, 1, 2, 5, 6] })
 const f = new CalculusSet({ conditions: [] })
 it(`interval`, () => {
     const ins = new CalculusSet({ interval: [-1, 5], conditions: [-1] })
+    const ins2 = new CalculusSet({ interval: [-1, 5], conditions: [-1], except: [2] })
     const ins1 = new CalculusSet({ interval: [-Infinity, 5], conditions: [-1] })
     expect(ins.have(0)).toBeTruthy()
     expect(ins.have(-1)).toBeTruthy()
@@ -17,6 +18,9 @@ it(`interval`, () => {
     expect(ins1.isInfinite()).toBeTruthy()
     expect(ins.getCenter()).toBe(2)
     expect(ins.getRadius()).toBe(3)
+    expect(ins.isNeighborhood()).toBeTruthy()
+    expect(ins.isDeletedNeighborhood()).toBeFalsy()
+    expect(ins2.isDeletedNeighborhood()).toBeTruthy()
 
 });
 it(`calc`, () => {
