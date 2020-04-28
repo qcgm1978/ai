@@ -1,8 +1,24 @@
 const { CalculusSet } = require('../mathematics/calculus/set')
+const ins = new CalculusSet({ conditions: [CalculusSet.isN, n => n < 6] })
 it(``, () => {
-    const ins = new CalculusSet()
     const aSet = ins.getSet([1, 2, 3])
     expect(aSet).toBeInstanceOf(Set)
     expect(aSet.has(1)).toBeTruthy()
     expect(aSet.has(4)).toBeFalsy()
+});
+it(``, () => {
+    expect(ins.oddSet(1)).toBeTruthy()
+    expect(ins.oddSet(1.1)).toBeFalsy()
+    expect(ins.oddSet(11)).toBeFalsy()
+    expect(CalculusSet.isN(11)).toBeTruthy()
+    expect(ins.isZ(0)).toBeTruthy()
+    expect(ins.isQ('1+3i')).toBeFalsy()
+    expect(ins.isQ('1')).toBeTruthy()
+    expect(ins.isR('1')).toBeTruthy()
+    expect(ins.isR('a')).toBeFalsy()
+    const twoSet = ins.buildSet()
+    expect(twoSet(2, n => 2 * n - 1)).toBe(3)
+});
+it(``, () => {
+    expect(ins.hasElement(3)).toBeTruthy()
 });
