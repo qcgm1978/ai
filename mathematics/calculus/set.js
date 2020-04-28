@@ -5,22 +5,46 @@ class CalculusSet extends Set {
         this.conditions = conditions
         this.set = this.buildSet()
     }
+    intersect(set) {
+        const arr = []
+        set.forEach((value) => {
+            if (this.has(value)) {
+
+                arr.push(value)
+            }
+        })
+        return arr
+    }
+    unite(set) {
+        set.forEach((value) => {
+            this.add(value)
+        })
+        return this.size
+    }
     hasElement(ele) {
         return this.set.have(ele)
     }
-    isEqualTo(set) {
-        if (this.size !== set.size) {
-            return false
-        }
+    isEmptySet() {
+        return !!!this.size
+    }
+
+    hasSet(set) {
         let ret = true
-        this.forEach(function (value) {
-            if (set.has(value)) {
+        set.forEach((value) => {
+            if (this.has(value)) {
                 return
             } else {
                 ret = false
             }
         })
         return ret
+    }
+
+    isEqualTo(set) {
+        if (this.size !== set.size) {
+            return false
+        }
+        return this.hasSet(set)
     }
     buildSet() {
         this.set = new Set()
