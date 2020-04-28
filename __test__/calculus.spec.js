@@ -21,4 +21,14 @@ it(``, () => {
 });
 it(``, () => {
     expect(ins.hasElement(3)).toBeTruthy()
+    const a = new CalculusSet({ conditions: [1, 2, 3, 5] })
+    const b = new CalculusSet({ conditions: [3, 1, 2, 4] })
+    const c = new CalculusSet({ conditions: [3, 1, 2] })
+    const d = new CalculusSet({ conditions: [3, 1, 2, 5] })
+    const e = new CalculusSet({ conditions: [3, 1, 2, 5, 6] })
+    expect(a.isEqualTo(b)).toBeFalsy()
+    expect(a.isEqualTo(c)).toBeFalsy()
+    expect(a.isEqualTo(d)).toBeTruthy()
+    expect(a.isEqualTo(e)).toBeFalsy()
+    expect(d.isEqualTo(a)).toBeTruthy()
 });

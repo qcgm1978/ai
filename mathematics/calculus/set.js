@@ -1,18 +1,42 @@
 const math = require('mathjs')
-class CalculusSet {
+class CalculusSet extends Set {
     constructor({ conditions = [] }) {
+        super()
         this.conditions = conditions
         this.set = this.buildSet()
     }
     hasElement(ele) {
-        return this.set.has(ele)
+        return this.set.have(ele)
+    }
+    isEqualTo(set) {
+        if (this.size !== set.size) {
+            return false
+        }
+        let ret = true
+        this.forEach(function (value) {
+            if (set.has(value)) {
+                return
+            } else {
+                ret = false
+            }
+        })
+        return ret
     }
     buildSet() {
         this.set = new Set()
-        this.set.has = (param) => this.conditions.every(item => item(param))
-        return (param, calc) => this.conditions.every(item => item(param)) ? calc(param) : []
+        this.set.have = (param) => this.conditions.every(item => item(param))
+        this.addEle()
+        return (param, calc) => {
+            return this.conditions.every(item => item(param)) ? calc(param) : []
+        }
     }
-
+    addEle() {
+        this.conditions.map(item => {
+            if (!(item instanceof Function)) {
+                this.add(item)
+            }
+        })
+    }
     isZ(num) {
         return Number.isInteger(num)
 
