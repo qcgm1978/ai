@@ -5,21 +5,76 @@ class CalculusSet extends Set {
         this.conditions = conditions
         this.set = this.buildSet()
     }
-    intersect(set) {
+    complementary(set) {
         const arr = []
         set.forEach((value) => {
             if (this.has(value)) {
 
+            } else {
                 arr.push(value)
+
+            }
+        })
+
+        return arr
+    }
+    universal(set) {
+        const arr = []
+        this.forEach((value) => {
+            if (arr.includes(value)) {
+
+            } else {
+                arr.push(value)
+
+            }
+        })
+        set.forEach((value) => {
+            if (arr.includes(value)) {
+
+            } else {
+                arr.push(value)
+
             }
         })
         return arr
     }
-    unite(set) {
-        set.forEach((value) => {
-            this.add(value)
+    difference(set) {
+        const arr = []
+        this.forEach((value) => {
+            if (set.has(value)) {
+
+            } else {
+                arr.push(value)
+
+            }
         })
-        return this.size
+        return arr
+    }
+    intersect(...set) {
+        const arr = []
+        set.map(item => {
+
+            item.forEach((value) => {
+                if (this.has(value)) {
+
+                    arr.push(value)
+                }
+            })
+        })
+        return arr
+    }
+    unite(...set) {
+        const arr = []
+        set.map(item => {
+
+            item.forEach((value) => {
+                this.add(value)
+            })
+        })
+        this.forEach((value) => {
+            arr.push(value)
+        })
+        return arr
     }
     hasElement(ele) {
         return this.set.have(ele)
