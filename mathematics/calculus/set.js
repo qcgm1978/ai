@@ -5,10 +5,12 @@ class CalculusSet extends Set {
         this.conditions = conditions
         this.set = this.buildSet()
     }
-    complementary(set) {
+    temp = []
+    universal = new Set()
+    complementary() {
         const arr = []
-        set.forEach((value) => {
-            if (this.has(value)) {
+        this.universal.forEach((value) => {
+            if (this.temp.includes(value)) {
 
             } else {
                 arr.push(value)
@@ -18,26 +20,15 @@ class CalculusSet extends Set {
 
         return arr
     }
-    universal(set) {
-        const arr = []
-        this.forEach((value) => {
-            if (arr.includes(value)) {
-
-            } else {
-                arr.push(value)
-
-            }
+    setUniversal(...arr) {
+        arr.map(item => {
+            item.forEach(val => {
+                this.universal.add(val)
+            })
         })
-        set.forEach((value) => {
-            if (arr.includes(value)) {
-
-            } else {
-                arr.push(value)
-
-            }
-        })
-        return arr
+        return this
     }
+
     difference(set) {
         const arr = []
         this.forEach((value) => {
@@ -51,20 +42,18 @@ class CalculusSet extends Set {
         return arr
     }
     intersect(...set) {
-        const arr = []
         set.map(item => {
 
             item.forEach((value) => {
                 if (this.has(value)) {
 
-                    arr.push(value)
+                    this.temp.push(value)
                 }
             })
         })
-        return arr
+        return this
     }
     unite(...set) {
-        const arr = []
         set.map(item => {
 
             item.forEach((value) => {
@@ -72,9 +61,14 @@ class CalculusSet extends Set {
             })
         })
         this.forEach((value) => {
-            arr.push(value)
+            this.temp.push(value)
         })
-        return arr
+        return this
+    }
+    getResult() {
+        const ret = [...this.temp]
+        this.temp = []
+        return ret
     }
     hasElement(ele) {
         return this.set.have(ele)
@@ -113,6 +107,7 @@ class CalculusSet extends Set {
         this.conditions.map(item => {
             if (!(item instanceof Function)) {
                 this.add(item)
+                this.universal.add(item)
             }
         })
     }

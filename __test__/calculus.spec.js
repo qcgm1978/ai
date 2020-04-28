@@ -7,14 +7,9 @@ const d = new CalculusSet({ conditions: [3, 1, 2, 5] })
 const e = new CalculusSet({ conditions: [3, 1, 2, 5, 6] })
 const f = new CalculusSet({ conditions: [] })
 it(`calc`, () => {
-    expect(a.unite(b)).toEqual(expect.arrayContaining([1, 2, 3, 4, 5]))
-    expect(b.unite(a)).toEqual(expect.arrayContaining([1, 2, 3, 4, 5]))
-    expect(b.intersect(a)).toEqual(expect.arrayContaining([1, 2, 3]))
-    expect(b.intersect(a)).toEqual(expect.arrayContaining([1, 2, 3]))
-    expect(b.unite(a, c)).toEqual(expect.arrayContaining([1, 2, 3, 4, 5, 6, 7]))
-    expect(b.unite(c, a)).toEqual(expect.arrayContaining([1, 2, 3, 4, 5, 6, 7]))
-    expect(b.intersect(c, a)).toEqual(expect.arrayContaining([3]))
-    expect(b.intersect(a, c)).toEqual(expect.arrayContaining([3]))
+
+    a.setUniversal([1, 2, 3, 4, 5, 6])
+    expect(a.unite(b).complementary()).toEqual(expect.arrayContaining([6]))
 });
 it(``, () => {
     const aSet = ins.getSet([1, 2, 3])
