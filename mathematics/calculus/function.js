@@ -1,5 +1,16 @@
+const math = require('mathjs')
+const nerdamer = require('nerdamer');
+require('nerdamer/Solve.js')
 class CalculusFunction {
     constructor() { }
+    floor(num) {
+        return math.floor(num)
+    }
+    buildFunc({ expression = '', param }) {
+        var e = nerdamer(expression);
+        var f = e.buildFunction();
+        return f(param);
+    }
     throwDomainErr(x) {
         throw new Error('x isn\'t in the domain of definition')
     }
