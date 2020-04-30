@@ -1,6 +1,14 @@
 const nerdamer = require('nerdamer');
 class Func {
     constructor() { }
+    convertMathLang({ symmetryAxis, left = '1+x' }) {
+        const match = left.match(/\d+/);
+
+        const num = match ? +match[0] : 0
+        const right = symmetryAxis * 2 - num
+        const sign = left.includes('-x') ? '+' : '-'
+        return `f(${left})=f(${right}${sign}x)`
+    }
     caclCubesSum(start, end) {
         const count = (end - start) / 2;
         let mean = 0

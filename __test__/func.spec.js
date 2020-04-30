@@ -3,6 +3,12 @@ const nerdamer = require('nerdamer');
 const { simplify, parse, derivative } = require('mathjs')
 const func = new Func()
 it(``, () => {
+    expect(func.convertMathLang({ symmetryAxis: 1 })).toBe('f(1+x)=f(1-x)')
+    expect(func.convertMathLang({ symmetryAxis: 1, left: 'x' })).toBe('f(x)=f(2-x)')
+    expect(func.convertMathLang({ symmetryAxis: 1, left: '-x' })).toBe('f(-x)=f(2+x)')
+    // expect(func.convertMathLang({ symmetryAxis: 1, left: -1 })).toBe('f(x-1)=f(x+1)')
+});
+it(``, () => {
     expect(func.caclCubesSum(1)).toBe(1)
     expect(func.caclCubesSum(1, 2)).toBe(9)
     expect(func.caclCubesSum(1, 3)).toBe(36)
