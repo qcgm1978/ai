@@ -81,7 +81,7 @@ class CalculusSet extends Set {
         set.map(item => {
 
             item.forEach((value) => {
-                if (this.has(value)) {
+                if (this.has(value) && !this.temp.includes(value)) {
 
                     this.temp.push(value)
                 }

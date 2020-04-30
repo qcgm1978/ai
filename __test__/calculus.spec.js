@@ -7,6 +7,15 @@ const d = new CalculusSet({ conditions: [3, 1, 2, 5] })
 const e = new CalculusSet({ conditions: [3, 1, 2, 5, 6] })
 const f = new CalculusSet({ conditions: [] })
 it(``, () => {
+    expect(a.intersect(b).getResult())
+        .toEqual(expect.arrayContaining([1, 2, 3]))
+    expect(a.intersect(c).getResult())
+        .toEqual(expect.arrayContaining([3]))
+    expect(a.intersect(b.unite(c)).getResult())
+        // .toEqual(a.intersect(b).unite(a.intersect(c)).getResult())
+        .toEqual(expect.arrayContaining([1, 2, 3]))
+});
+it(``, () => {
     const arr = [1, 2, 3];
     const arr1 = [1, 2, 3, 4, 5];
 
