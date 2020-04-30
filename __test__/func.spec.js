@@ -6,7 +6,7 @@ it(``, () => {
     expect(func.convertMathLang({ symmetryAxis: 1 })).toBe('f(1+x)=f(1-x)')
     expect(func.convertMathLang({ symmetryAxis: 1, left: 'x' })).toBe('f(x)=f(2-x)')
     expect(func.convertMathLang({ symmetryAxis: 1, left: '-x' })).toBe('f(-x)=f(2+x)')
-    // expect(func.convertMathLang({ symmetryAxis: 1, left: -1 })).toBe('f(x-1)=f(x+1)')
+    expect(func.convertMathLang({ symmetryAxis: 1, left: '4+x' })).toBe('f(4+x)=f(-2-x)')
 });
 it(``, () => {
     expect(func.caclCubesSum(1)).toBe(1)
@@ -16,14 +16,7 @@ it(``, () => {
     const bruteForceCalc = Array(30).fill('').reduce((acc, item, index) => acc + (index + 1) ** 3, 0)
     expect(func.caclCubesSum(1, 30)).toBe(bruteForceCalc).toBe(216225)
 });
-it(``, () => {
-    var x = nerdamer('simplify((a^2+b^2)/(a*b))');
-    expect(x.toString()).toEqual("(a*b)^(-1)*(a^2+b^2)*simplify")
-    const str = '(a^2+b^2)/(a*b)';
 
-    expect((simplify(str).toString())).toBe("(a ^ 2 + b ^ 2) / (a * b)")
-    expect((func.simplify(str))).toBe("a^2/a*b + b^2/a*b")
-});
 it(``, () => {
     const arith = func.getArithMean(5, 6);
 

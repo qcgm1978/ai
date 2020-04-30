@@ -1,13 +1,18 @@
 const nerdamer = require('nerdamer');
+require('nerdamer/Solve.js')
 class Func {
     constructor() { }
     convertMathLang({ symmetryAxis, left = '1+x' }) {
         const match = left.match(/\d+/);
 
         const num = match ? +match[0] : 0
-        const right = symmetryAxis * 2 - num
+        const right = this.getVal({ mean: symmetryAxis, x: num })
         const sign = left.includes('-x') ? '+' : '-'
         return `f(${left})=f(${right}${sign}x)`
+    }
+    getVal({ mean, x }) {
+        var sol = nerdamer.solveEquations([`(x+y)/2=${mean}`, `x=${x}`]);
+        return sol[1][1];
     }
     caclCubesSum(start, end) {
         const count = (end - start) / 2;
