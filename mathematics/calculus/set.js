@@ -11,6 +11,9 @@ class CalculusSet extends Set {
     }
     temp = []
     universal = new Set()
+    getSubsetCount() {
+        return 2 ** this.size
+    }
     isDeletedNeighborhood() {
         const center = this.getCenter()
         return this.isNeighborhood() && this.except.includes(center)
@@ -87,15 +90,16 @@ class CalculusSet extends Set {
         return this
     }
     unite(...set) {
-        set.map(item => {
+        [...set, this].map(item => {
 
             item.forEach((value) => {
-                this.add(value)
+                if (!this.temp.includes(value)) {
+
+                    this.temp.push(value)
+                }
             })
         })
-        this.forEach((value) => {
-            this.temp.push(value)
-        })
+
         return this
     }
     getResult() {
@@ -136,8 +140,8 @@ class CalculusSet extends Set {
 
         return param > this.interval[0] && param < this.interval[1]
     }
-    addEle() {
-        this.conditions.map(item => {
+    addEle(arr = this.conditions) {
+        arr.map(item => {
             if (!(item instanceof Function)) {
                 this.add(item)
                 this.universal.add(item)

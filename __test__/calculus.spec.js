@@ -14,10 +14,14 @@ it(``, () => {
     expect(b.intersect(a).getResult()).toEqual(expect.arrayContaining(arr))
     const set = a.buildSetByArr(arr)
     expect(b.hasSet(set)).toBe(a.hasSet(set)).toBeTruthy()
-    expect(a.unite(b).getResult()).toEqual(expect.arrayContaining(arr1))
+    const arr2 = a.unite(b).getResult();
+
+    expect(arr2).toEqual(expect.arrayContaining(arr1))
     expect(b.unite(a).getResult()).toEqual(expect.arrayContaining(arr1))
     const set1 = a.buildSetByArr(arr1)
     expect(set1.hasSet(a)).toBe(set1.hasSet(b)).toBeTruthy()
+    expect(set1.size).toBe(a.size + b.size - a.intersect(b).getResult().length).toBe(5)
+    expect(a.getSubsetCount()).toBe(16)
 });
 it(`interval`, () => {
     const ins = new CalculusSet({ interval: [-1, 5], conditions: [-1] })
