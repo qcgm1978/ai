@@ -1,5 +1,23 @@
+const nerdamer = require('nerdamer');
 class Func {
     constructor() { }
+    caclCubesSum(start, end) {
+        const count = (end - start) / 2;
+        let mean = 0
+        if (count === Math.trunc(count)) {
+            mean = (end + start) / 2
+        }
+
+        return end ? ((start + end) * Math.ceil(count) + mean) ** 2 : start ** 3
+    }
+    simplify(str) {
+        const arr = str.replace(/\(|\)/g, '').split('/')
+        const numerator = arr[0].split('+')
+        return numerator.reduce((acc, item, index) => {
+            const add = numerator[index + 1] ? ' + ' : ''
+            return `${acc}${item}/${arr[1]}${add}`
+        }, '')
+    }
     getWeightedMaxMin(a, b) {
         return {
             min: this.getArithMean(a, b)

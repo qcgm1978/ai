@@ -1,6 +1,24 @@
 const { Func } = require('../mathematics/function/function')
+const nerdamer = require('nerdamer');
+const { simplify, parse, derivative } = require('mathjs')
+const func = new Func()
 it(``, () => {
-    const func = new Func()
+    expect(func.caclCubesSum(1)).toBe(1)
+    expect(func.caclCubesSum(1, 2)).toBe(9)
+    expect(func.caclCubesSum(1, 3)).toBe(36)
+    expect(func.caclCubesSum(1, 4)).toBe(100)
+    const bruteForceCalc = Array(30).fill('').reduce((acc, item, index) => acc + (index + 1) ** 3, 0)
+    expect(func.caclCubesSum(1, 30)).toBe(bruteForceCalc).toBe(216225)
+});
+it(``, () => {
+    var x = nerdamer('simplify((a^2+b^2)/(a*b))');
+    expect(x.toString()).toEqual("(a*b)^(-1)*(a^2+b^2)*simplify")
+    const str = '(a^2+b^2)/(a*b)';
+
+    expect((simplify(str).toString())).toBe("(a ^ 2 + b ^ 2) / (a * b)")
+    expect((func.simplify(str))).toBe("a^2/a*b + b^2/a*b")
+});
+it(``, () => {
     const arith = func.getArithMean(5, 6);
 
     expect(arith).toBe(5.5)
