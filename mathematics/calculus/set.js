@@ -144,6 +144,15 @@ class CalculusSet extends Set {
             }
         })
     }
+    buildSetByArr(arr) {
+        const set = new Set()
+        arr.map(item => {
+            if (!(item instanceof Function)) {
+                set.add(item)
+            }
+        })
+        return set
+    }
     isZ(num) {
         return Number.isInteger(num)
 

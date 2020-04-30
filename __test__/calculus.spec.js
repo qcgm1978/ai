@@ -6,6 +6,14 @@ const c = new CalculusSet({ conditions: [3, 6, 7] })
 const d = new CalculusSet({ conditions: [3, 1, 2, 5] })
 const e = new CalculusSet({ conditions: [3, 1, 2, 5, 6] })
 const f = new CalculusSet({ conditions: [] })
+it(``, () => {
+    const arr = [1, 2, 3];
+
+    expect(a.intersect(b).getResult()).toEqual(expect.arrayContaining(arr))
+    expect(b.intersect(a).getResult()).toEqual(expect.arrayContaining(arr))
+    const set = a.buildSetByArr(arr)
+    expect(b.hasSet(set)).toBe(a.hasSet(set)).toBeTruthy()
+});
 it(`interval`, () => {
     const ins = new CalculusSet({ interval: [-1, 5], conditions: [-1] })
     const ins2 = new CalculusSet({ interval: [-1, 5], conditions: [-1], except: [2] })
