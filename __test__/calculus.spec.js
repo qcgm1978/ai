@@ -8,11 +8,16 @@ const e = new CalculusSet({ conditions: [3, 1, 2, 5, 6] })
 const f = new CalculusSet({ conditions: [] })
 it(``, () => {
     const arr = [1, 2, 3];
+    const arr1 = [1, 2, 3, 4, 5];
 
     expect(a.intersect(b).getResult()).toEqual(expect.arrayContaining(arr))
     expect(b.intersect(a).getResult()).toEqual(expect.arrayContaining(arr))
     const set = a.buildSetByArr(arr)
     expect(b.hasSet(set)).toBe(a.hasSet(set)).toBeTruthy()
+    expect(a.unite(b).getResult()).toEqual(expect.arrayContaining(arr1))
+    expect(b.unite(a).getResult()).toEqual(expect.arrayContaining(arr1))
+    const set1 = a.buildSetByArr(arr1)
+    expect(set1.hasSet(a)).toBe(set1.hasSet(b)).toBeTruthy()
 });
 it(`interval`, () => {
     const ins = new CalculusSet({ interval: [-1, 5], conditions: [-1] })
