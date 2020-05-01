@@ -33,8 +33,19 @@ class CalculusSet extends Set {
         return sol.find(item => item[0] === variable)[1];
     }
     solveInEquations({ equations = [], variable }) {
-        var sol = nerdamer.solveEquations(equations);
-        return sol.find(item => item[0] === variable)[1];
+        const signs = ['<', '>']
+        const index = /</.test(equations[0]) ? 0 : 1
+        const reg = new RegExp(`${variable}.*/`)
+        const isNumerator = reg.test(equations[0])
+        const resultSign = isNumerator ? signs[index] : signs.find(item => item !== signs[index])
+        const equation = equations.map(item => item.replace(/<|>/g, '='))
+        const num = +equation[0].match(/\=((\d|\.)+)/)[1]
+        const sol = nerdamer.solveEquations(equation);
+        let zeroStr = ''
+        if (signs[index] === '>' && num > 0) {
+            zeroStr = `1 < `
+        }
+        return `${zeroStr}${variable} ${resultSign} ${sol.find(item => item[0] === variable)[1]}`;
     }
     getRadius() {
         var sol = nerdamer.solveEquations([`x-y=${this.interval[0]}`, `x+y=${this.interval[1]}`]);

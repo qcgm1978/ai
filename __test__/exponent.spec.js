@@ -3,7 +3,7 @@ const exponent = new Exponent()
 const log = new Logarithm()
 it(``, () => {
     expect(log.inequation('log3(x)>-1')).toBe("x > 0.33")
-    expect(log.solveInEquations({ equations: ['log(3)/log(x)=0.5'], variable: 'x' })).toBe(9)
+    expect(log.solveInEquations({ equations: ['log(3)/log(x)>0.5'], variable: 'x' })).toBe("1 < x < 9")
 });
 it(``, () => {
     expect(exponent.isInDomain(5)).toBeTruthy()
