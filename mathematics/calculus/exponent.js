@@ -14,6 +14,12 @@ class Logarithm extends CalculusSet {
     }
     isInDomain = this.isPositiveR
     isInCodomain = this.isR
+    inequation(expression) {
+        const [, base, power, sign, lg] = expression.match(/log(.+)\((.+)\)(.)(-?.+)/)
+        const decimal = (base ** lg).toFixed(2)
+
+        return `${power} ${sign} ${decimal}`
+    }
     getLog(base, power) {
         return Math.log(power) / Math.log(base)
     }

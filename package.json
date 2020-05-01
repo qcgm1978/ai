@@ -17,6 +17,7 @@
     "algebra.js": "^0.2.6",
     "echarts": "^4.7.0",
     "echarts-gl": "^1.1.1",
+    "fractional": "^1.0.0",
     "jsxgraph": "^1.00.0",
     "mathjs": "^6.6.4",
     "matter-js": "^0.14.2",

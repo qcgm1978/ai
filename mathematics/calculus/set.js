@@ -32,6 +32,10 @@ class CalculusSet extends Set {
         var sol = nerdamer.solveEquations(equations);
         return sol.find(item => item[0] === variable)[1];
     }
+    solveInEquations({ equations = [], variable }) {
+        var sol = nerdamer.solveEquations(equations);
+        return sol.find(item => item[0] === variable)[1];
+    }
     getRadius() {
         var sol = nerdamer.solveEquations([`x-y=${this.interval[0]}`, `x+y=${this.interval[1]}`]);
         return sol[1][1];
