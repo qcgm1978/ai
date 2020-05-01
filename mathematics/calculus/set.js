@@ -2,7 +2,7 @@ const math = require('mathjs')
 const nerdamer = require('nerdamer');
 require('nerdamer/Solve.js')
 class CalculusSet extends Set {
-    constructor({ conditions = [], interval = [-Infinity, Infinity], except = [] }) {
+    constructor({ conditions = [], interval = [-Infinity, Infinity], except = [] } = {}) {
         super()
         this.conditions = conditions
         this.interval = interval
@@ -11,6 +11,10 @@ class CalculusSet extends Set {
     }
     temp = []
     universal = new Set()
+    and(...set) {
+        this.temp = [...set, this]
+        return this
+    }
     getSubsetCount() {
         return 2 ** this.size
     }
@@ -22,8 +26,11 @@ class CalculusSet extends Set {
         return !isNaN(this.getCenter())
     }
     getCenter() {
-        var sol = nerdamer.solveEquations([`x-y=${this.interval[0]}`, `x+y=${this.interval[1]}`]);
-        return sol[0][1];
+        return this.solveEquations({ equations: [`x-y=${this.interval[0]}`, `x+y=${this.interval[1]}`], variable: 'x' })
+    }
+    solveEquations({ equations = [], variable }) {
+        var sol = nerdamer.solveEquations(equations);
+        return sol.find(item => item[0] === variable)[1];
     }
     getRadius() {
         var sol = nerdamer.solveEquations([`x-y=${this.interval[0]}`, `x+y=${this.interval[1]}`]);
@@ -58,8 +65,11 @@ class CalculusSet extends Set {
     }
     setUniversal(...arr) {
         arr.map(item => {
-            item.forEach(val => {
-                this.universal.add(val)
+            item.map(val => {
+                this.temp.map(it => {
+
+                    it.universal.add(val)
+                })
             })
         })
         return this
@@ -165,7 +175,7 @@ class CalculusSet extends Set {
         try {
 
             num = math.complex(num)
-            return !!math.im(num) || !!math.re(num)
+            return !math.im(num) && !!math.re(num)
         } catch{
             return false
         }

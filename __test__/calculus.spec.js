@@ -7,6 +7,14 @@ const d = new CalculusSet({ conditions: [3, 1, 2, 5] })
 const e = new CalculusSet({ conditions: [3, 1, 2, 5, 6] })
 const f = new CalculusSet({ conditions: [] })
 it(``, () => {
+    a.and(b).setUniversal([1, 2, 3, 5, 6, 7])
+    expect(a.complementary()).toEqual(expect.arrayContaining([6, 7]))
+    expect(b.complementary()).toEqual(expect.arrayContaining([6, 7]))
+    expect(a.intersect(b).complementary())
+        .toEqual(expect.arrayContaining([]))
+    expect(a.intersect(b).complementary()).toEqual(expect.arrayContaining([6, 7]))
+});
+it(``, () => {
     expect(a.intersect(b).getResult())
         .toEqual(expect.arrayContaining([1, 2, 3]))
     expect(a.intersect(c).getResult())
