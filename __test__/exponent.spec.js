@@ -3,9 +3,11 @@ const exponent = new Exponent()
 const log = new Logarithm()
 it(``, () => {
     expect(log.inRange({ expression: 'lga(3)', isMoreThanOne: false })).toEqual([-Infinity, 0]);
-    expect(log.inRange({ expression: 'lga(.33)', isMoreThanOne: false })).toEqual([0, Infinity]);
+    expect(log.inRange({ expression: 'lga(.33)', isMoreThanOne: false })).toEqual([1, Infinity]);
     expect(log.inRange({ expression: 'a^3', isMoreThanOne: false })).toEqual([0, 1]);
     expect(log.inRange({ expression: 'a^-3', isMoreThanOne: true })).toEqual([0, 1]);
+    expect(log.compare([{ expression: 'lga(3)', isMoreThanOne: false }, { expression: 'lga(0.3)', isMoreThanOne: false }, { expression: 'a^-3', isMoreThanOne: true }])).toEqual('item1<item3<item2');
+    expect(log.compare([{ expression: 'lga(3)', isMoreThanOne: false }, { expression: 'lga(0.83)', isMoreThanOne: false, antilogGreater: true }, { expression: 'a^3', isMoreThanOne: true }])).toEqual('item1<item2<item3');
 });
 it(``, () => {
     expect(log.inequation('log3(x)>-1')).toBe("x > 0.33")

@@ -14,15 +14,32 @@ class Logarithm extends CalculusSet {
     }
     isInDomain = this.isPositiveR
     isInCodomain = this.isR
-    inRange({ expression, isMoreThanOne }) {
+    compare(arr) {
+        const range = arr.map((item, index) => {
+            return { ['item' + (index + 1)]: this.inRange(item) }
+        })
+        const sort = range.sort((a, b) => {
+            const aMax = Object.values(a)[0][1]
+            const bMax = Object.values(b)[0][1]
+            const sizeCompare = aMax > bMax
+
+            return sizeCompare ? 1 : -1
+        })
+        const len = sort.length
+        return sort.reduce((acc, item, index) => {
+            return acc + Object.keys(item) + ((len === index + 1) ? '' : '<')
+        }, '')
+    }
+    inRange({ expression, isMoreThanOne, antilogGreater }) {
         if (/lg/.test(expression)) {
 
             const [express, base, antilog] = expression.match(/lg(.*)\((.*)\)/)
+            const positive = antilogGreater ? [0, 1] : [1, Infinity]
             if (antilog < 1) {
-                return isMoreThanOne ? [-Infinity, 0] : [0, Infinity]
+                return isMoreThanOne ? [-Infinity, 0] : positive
             } else {
 
-                return isMoreThanOne ? [0, Infinity] : [-Infinity, 0]
+                return isMoreThanOne ? positive : [-Infinity, 0]
             }
         } else {
             const [express, base, log] = expression.match(/(.+)\^(.+)/)
