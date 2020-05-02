@@ -10,6 +10,13 @@ class Func {
 
         return `(${xy})`
     }
+    getDefineDomain(expression) {
+        const [numerator, denominator] = expression.split('/')
+        if (denominator.includes('x')) {
+            const sol = nerdamer(`solve(${denominator}, x)`)
+            return `x!=${eval(sol.toString())[0]}`
+        }
+    }
     getRange(expression) {
         const [numerator, denominator] = expression.split('/')
         if (numerator.includes('x') && denominator.includes('x')) {
