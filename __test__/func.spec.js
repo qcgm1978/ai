@@ -3,9 +3,10 @@ const nerdamer = require('nerdamer');
 const { simplify, parse, derivative } = require('mathjs')
 const func = new Func()
 it(``, () => {
-    expect(func.getRange('(ax+b)/(cx+d)')).toBe('x!=a/c')
+    expect(func.getRange('(ax+b)/(cx+d)')).toBe('y!=a/c')
     const equation = 'y=(x+1)/(2*x-2)';
     expect(func.getDefineDomain(equation)).toBe('x!=1')
+    expect(func.getRange(equation)).toBe('y!=1/2')
 
     expect(func.getSpecialPoint(equation)).toBe('(0,-0.5)')
 });

@@ -20,10 +20,15 @@ class Func {
     getRange(expression) {
         const [numerator, denominator] = expression.split('/')
         if (numerator.includes('x') && denominator.includes('x')) {
-            const coefNumerator = numerator.match(/(\w+)x/)[1]
-            const coefDenominator = denominator.match(/(\w+)x/)[1]
-            return `x!=${coefNumerator}/${coefDenominator}`
+            const coefNumerator = this.getCoef(numerator)
+            const coefDenominator = this.getCoef(denominator)
+            return `y!=${coefNumerator}/${coefDenominator}`
         }
+    }
+    getCoef(str) {
+        const coef = str.match(/([1-9a-zA-Z]+)\*?x/);
+
+        return coef ? coef[1] : 1
     }
     isExplicitFunction(str) {
         return /y=/.test(str)
