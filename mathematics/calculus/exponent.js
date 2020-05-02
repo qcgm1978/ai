@@ -14,11 +14,18 @@ class Logarithm extends CalculusSet {
     }
     isInDomain = this.isPositiveR
     isInCodomain = this.isR
+    translateFunc(str, left, top) {
+        const replace = str.replace(/(=.*)x/, (`$1(x+${left})+${top}`))
+        const arr = replace.split('=')
+        const right = arr[1]
+        arr[1] = nerdamer(`simplify(${right})`).toString().replace('*', '')
+        return arr.join('=')
+    }
     compareSolutions(arr) {
         const sols = arr.map((item) => {
             if (/lg/.test(item)) {
                 const [express, base, antilog] = item.match(/lg(.*)\((.*)\)/)
-                var equations = [item.replace(/lg.+/, `log(${antilog})/log(${base})`)]
+                var equations = [item.replace(/lg.+/, `log(${antilog}) / log(${base})`)]
             }
             return this.solveEquations({ equations, isAll: true })
         })

@@ -2,6 +2,10 @@ const { Exponent, Logarithm } = require('../mathematics/calculus/exponent')
 const exponent = new Exponent()
 const log = new Logarithm()
 it(``, () => {
+    const str = 'f(x)=2x+1'
+    expect(log.translateFunc(str, 1, 2)).toBe('f(x)=2x+5')
+});
+it(``, () => {
     expect(log.solveEquations({ equations: ['2^a=log(a)/log(0.5)'] })).toBeCloseTo(0.401)
     expect(log.compareSolutions(['2^a=lg0.5(a)', '0.5^b=lg0.5(b)', '0.5^c=lg2(c)'])).toEqual('a<b<c');
 
