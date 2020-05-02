@@ -7,7 +7,7 @@ it(``, () => {
     expect(func.getRange(equation)).toBe('y!=1/2')
 
     expect(func.getSpecialPoint(equation)).toBe('(0,-0.5)')
-    const inverse = "x=(-4+2*y)*(3+y)^(-1)";
+    const inverse = "(-4+2*y)*(3+y)^(-1)";
 
     expect(func.inverseSolution('y=(4+3*sin(x))/(2-sin(x))')).toBe(inverse)
     expect(func.changeVar(inverse, [-1, 1])).toBe("0.33<y<7")

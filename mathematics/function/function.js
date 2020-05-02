@@ -9,11 +9,11 @@ class Func extends CalculusSet {
         const solve = str.split('sin(x)').join('x')
         const toStr = nerdamer(`solve(${solve}, x)`).toString();
 
-        return 'x=' + (toStr).slice(1, -1);
+        return (toStr).slice(1, -1);
     }
     changeVar(str, range) {
         const sols = range.map(item => {
-            const sol = this.solveEquations({ equations: [str, `x=${item}`], variable: 'y' })
+            const sol = this.solveEquations({ equations: [`x=${str}`, `x=${item}`], variable: 'y' })
             return +sol.toFixed(2)
         })
         return `${sols[0]}<y<${sols[1]}`
