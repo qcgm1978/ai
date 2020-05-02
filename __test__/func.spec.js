@@ -3,6 +3,13 @@ const nerdamer = require('nerdamer');
 const { simplify, parse, derivative } = require('mathjs')
 const func = new Func()
 it(``, () => {
+    const str = 'y=2x+1'
+    expect(func.translateFunc(str, 1, 2)).toBe('y=2x+5')
+    expect(func.translateFunc('x^2+y^2=4', -1, 2)).toBe('(x+1)^2+(y-2)^2=4')
+    expect(func.translateFunc('x=1/2', -1, 2)).toBe('(x+1)=1/2')
+    expect(func.translateFunc('(3,5)', -1, 2)).toBe('(2,7)')
+});
+it(``, () => {
     expect(func.convertMathLang({ symmetryAxis: 1 })).toBe('f(1+x)=f(1-x)')
     expect(func.convertMathLang({ symmetryAxis: 1, left: 'x' })).toBe('f(x)=f(2-x)')
     expect(func.convertMathLang({ symmetryAxis: 1, left: '-x' })).toBe('f(-x)=f(2+x)')

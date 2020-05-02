@@ -3,6 +3,7 @@ const nerdamer = require('nerdamer');
 require('nerdamer/Solve.js')
 class CalculusFunction {
     constructor() { }
+
     floor(num) {
         return math.floor(num)
     }

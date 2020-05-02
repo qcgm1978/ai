@@ -1,13 +1,7 @@
 const { Exponent, Logarithm } = require('../mathematics/calculus/exponent')
 const exponent = new Exponent()
 const log = new Logarithm()
-it(``, () => {
-    const str = 'y=2x+1'
-    expect(log.translateFunc(str, 1, 2)).toBe('y=2x+5')
-    expect(log.translateFunc('x^2+y^2=4', -1, 2)).toBe('(x+1)^2+(y-2)^2=4')
-    expect(log.translateFunc('x=1/2', -1, 2)).toBe('(x+1)=1/2')
-    expect(log.translateFunc('(3,5)', -1, 2)).toBe('(2,7)')
-});
+
 it(``, () => {
     expect(log.solveEquations({ equations: ['2^a=log(a)/log(0.5)'] })).toBeCloseTo(0.401)
     expect(log.compareSolutions(['2^a=lg0.5(a)', '0.5^b=lg0.5(b)', '0.5^c=lg2(c)'])).toEqual('a<b<c');
