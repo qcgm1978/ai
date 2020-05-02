@@ -2,6 +2,14 @@ const nerdamer = require('nerdamer');
 require('nerdamer/Solve.js')
 class Func {
     constructor() { }
+    getSpecialPoint(str) {
+        const [left, right] = str.split('=')
+        const sol = nerdamer.solveEquations([str, 'x=0']);
+
+        const xy = sol.map(item => item[1]).join(',');
+
+        return `(${xy})`
+    }
     getRange(expression) {
         const [numerator, denominator] = expression.split('/')
         if (numerator.includes('x') && denominator.includes('x')) {

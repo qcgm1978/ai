@@ -4,6 +4,7 @@ const { simplify, parse, derivative } = require('mathjs')
 const func = new Func()
 it(``, () => {
     expect(func.getRange('(ax+b)/(cx+d)')).toBe('x!=a/c')
+    expect(func.getSpecialPoint('y=(x+1)/(2*x-2)')).toBe('(0,-0.5)')
 });
 it(``, () => {
     const str = 'y=2x+1'
