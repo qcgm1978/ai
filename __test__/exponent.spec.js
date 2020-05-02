@@ -2,12 +2,18 @@ const { Exponent, Logarithm } = require('../mathematics/calculus/exponent')
 const exponent = new Exponent()
 const log = new Logarithm()
 it(``, () => {
+    expect(log.solveEquations({ equations: ['2^a=log(a)/log(0.5)'] })).toBeCloseTo(0.401)
+    expect(log.compareSolutions(['2^a=lg0.5(a)', '0.5^b=lg0.5(b)', '0.5^c=lg2(c)'])).toEqual('a<b<c');
+
+});
+it(``, () => {
     expect(log.inRange({ expression: 'lga(3)', isMoreThanOne: false })).toEqual([-Infinity, 0]);
     expect(log.inRange({ expression: 'lga(.33)', isMoreThanOne: false })).toEqual([1, Infinity]);
     expect(log.inRange({ expression: 'a^3', isMoreThanOne: false })).toEqual([0, 1]);
     expect(log.inRange({ expression: 'a^-3', isMoreThanOne: true })).toEqual([0, 1]);
     expect(log.compare([{ expression: 'lga(3)', isMoreThanOne: false }, { expression: 'lga(0.3)', isMoreThanOne: false }, { expression: 'a^-3', isMoreThanOne: true }])).toEqual('item1<item3<item2');
     expect(log.compare([{ expression: 'lga(3)', isMoreThanOne: false }, { expression: 'lga(0.83)', isMoreThanOne: false, antilogGreater: true }, { expression: 'a^3', isMoreThanOne: true }])).toEqual('item1<item2<item3');
+    expect(log.compare([{ expression: '2^0.5' }, { expression: 'lgPI(3)' }, { expression: 'lg2(sin2/5*PI)' }])).toEqual('item3<item2<item1');
 });
 it(``, () => {
     expect(log.inequation('log3(x)>-1')).toBe("x > 0.33")

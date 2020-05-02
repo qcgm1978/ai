@@ -14,6 +14,19 @@ class Logarithm extends CalculusSet {
     }
     isInDomain = this.isPositiveR
     isInCodomain = this.isR
+    compareSolutions(arr) {
+        const sols = arr.map((item) => {
+            if (/lg/.test(item)) {
+                const [express, base, antilog] = item.match(/lg(.*)\((.*)\)/)
+                var equations = [item.replace(/lg.+/, `log(${antilog})/log(${base})`)]
+            }
+            return this.solveEquations({ equations, isAll: true })
+        })
+        const sort = sols.sort((a, b) => {
+            return a[0][1] < b[0][1] ? -1 : 1
+        })
+        return sort.map(item => item[0][0]).join('<')
+    }
     compare(arr) {
         const range = arr.map((item, index) => {
             return { ['item' + (index + 1)]: this.inRange(item) }

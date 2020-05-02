@@ -28,9 +28,15 @@ class CalculusSet extends Set {
     getCenter() {
         return this.solveEquations({ equations: [`x-y=${this.interval[0]}`, `x+y=${this.interval[1]}`], variable: 'x' })
     }
-    solveEquations({ equations = [], variable }) {
+    solveEquations({ equations = [], variable, isAll = false }) {
         var sol = nerdamer.solveEquations(equations);
-        return sol.find(item => item[0] === variable)[1];
+        if (isAll) {
+            return sol
+        } else {
+
+            const firstSol = variable ? sol.find(item => item[0] === variable)[1] : sol[0][1]
+            return firstSol;
+        }
     }
     solveInEquations({ equations = [], variable }) {
         const signs = ['<', '>']
