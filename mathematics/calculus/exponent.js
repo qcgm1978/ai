@@ -14,12 +14,45 @@ class Logarithm extends CalculusSet {
     }
     isInDomain = this.isPositiveR
     isInCodomain = this.isR
+    isExplicitFunction(str) {
+        return /y=/.test(str)
+    }
     translateFunc(str, left, top) {
-        const replace = str.replace(/(=.*)x/, (`$1(x+${left})+${top}`))
-        const arr = replace.split('=')
-        const right = arr[1]
-        arr[1] = nerdamer(`simplify(${right})`).toString().replace('*', '')
-        return arr.join('=')
+        if (this.isExplicitFunction(str)) {
+
+            const replace = str.replace(/(=.*)x/, (`$1(x+${left})+${top}`))
+            const arr = replace.split('=')
+            const right = arr[1]
+            arr[1] = nerdamer(`simplify(${right})`).toString().replace('*', '')
+            return arr.join('=')
+        } else {
+            let xReplace = ''
+            if (/x/.test(str)) {
+
+                xReplace = str.replace(/x/, `(x-${left})`)
+            } else {
+                const x = +str.match(/(\d+),/)[1]
+                xReplace = str.replace(/(\d+)\,/, x + left + ',')
+
+            }
+            if (/y/.test(str)) {
+
+                xReplace = xReplace.replace(/y/, `(y-${top})`)
+            } else {
+                const reg = str.match(/,(\d+)/)
+                if (reg) {
+
+                    const y = +reg[1]
+                    xReplace = xReplace.replace(/,(\d+)/, ',' + (y + top))
+                }
+
+            }
+            // const arr = replace.split('=')
+            // const simplify = arr.map(item => {
+            //     return nerdamer(`simplify(${item})`).toString().replace('*', '').replace('--', '+')
+            // })
+            return xReplace.replace('--', '+')
+        }
     }
     compareSolutions(arr) {
         const sols = arr.map((item) => {
