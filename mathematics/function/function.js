@@ -2,6 +2,12 @@ const nerdamer = require('nerdamer');
 require('nerdamer/Solve.js')
 class Func {
     constructor() { }
+    inverseSolution(str) {
+        const solve = str.split('sin(x)').join('x')
+        const toStr = nerdamer(`solve(${solve}, x)`).toString();
+
+        return 'x=' + (toStr).slice(1, -1);
+    }
     getSpecialPoint(str) {
         const [left, right] = str.split('=')
         const sol = nerdamer.solveEquations([str, 'x=0']);

@@ -1,6 +1,4 @@
 const { Func } = require('../mathematics/function/function')
-const nerdamer = require('nerdamer');
-const { simplify, parse, derivative } = require('mathjs')
 const func = new Func()
 it(``, () => {
     expect(func.getRange('(ax+b)/(cx+d)')).toBe('y!=a/c')
@@ -9,6 +7,7 @@ it(``, () => {
     expect(func.getRange(equation)).toBe('y!=1/2')
 
     expect(func.getSpecialPoint(equation)).toBe('(0,-0.5)')
+    expect(func.inverseSolution('y=(4+3*sin(x))/(2-sin(x))')).toBe("x=(-4+2*y)*(3+y)^(-1)")
 });
 it(``, () => {
     const str = 'y=2x+1'
