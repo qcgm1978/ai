@@ -2,6 +2,14 @@ const nerdamer = require('nerdamer');
 require('nerdamer/Solve.js')
 class Func {
     constructor() { }
+    getRange(expression) {
+        const [numerator, denominator] = expression.split('/')
+        if (numerator.includes('x') && denominator.includes('x')) {
+            const coefNumerator = numerator.match(/(\w+)x/)[1]
+            const coefDenominator = denominator.match(/(\w+)x/)[1]
+            return `x!=${coefNumerator}/${coefDenominator}`
+        }
+    }
     isExplicitFunction(str) {
         return /y=/.test(str)
     }

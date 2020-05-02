@@ -3,6 +3,9 @@ const nerdamer = require('nerdamer');
 const { simplify, parse, derivative } = require('mathjs')
 const func = new Func()
 it(``, () => {
+    expect(func.getRange('(ax+b)/(cx+d)')).toBe('x!=a/c')
+});
+it(``, () => {
     const str = 'y=2x+1'
     expect(func.translateFunc(str, 1, 2)).toBe('y=2x+5')
     expect(func.translateFunc('x^2+y^2=4', -1, 2)).toBe('(x+1)^2+(y-2)^2=4')
