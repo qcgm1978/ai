@@ -5,6 +5,27 @@ class Func extends CalculusSet {
     constructor() {
         super()
     }
+    isMeanInequality(str, { a, b } = {}) {
+
+        const enableNegtive = isNaN(str.split('=')[1])
+        b = b || 1 / (a)
+        const mulStr = nerdamer(`${a}*${b}`).evaluate().toString();
+
+        const mul = mulStr.includes('/') ? eval(mulStr) : +mulStr
+
+        const sameSign = mul > 0;
+        const differ = `${a}-${b}`;
+
+        const solveDiffer = nerdamer.solve(differ, 'x');
+        const enablEqual = !!solveDiffer.symbol.elements.length
+        return enableNegtive && sameSign && enablEqual
+        return enablEqual
+    }
+    calcMin(str, { a, b } = {}) {
+        if (this.isMeanInequality(str, { a, b })) {
+            return this.getGeoMean(a, b) * 2
+        }
+    }
     solveInverseSymmetryPoint({ x, y, variable = 'm' }) {
         return +nerdamer.solve(`${x} = ${y}`, variable).toString().slice(1, -1)
         // return +nerdamer(`solve(${x} = ${y},${variable})`).toString().slice(1, -1)
@@ -90,12 +111,17 @@ class Func extends CalculusSet {
     isExplicitFunction(str) {
         return /y=/.test(str)
     }
+    getEqualsRight(equation) {
+        const arr = equation.split('=')
+        return arr[1]
+    }
+
     translateFunc(str, left, top) {
         if (this.isExplicitFunction(str)) {
 
             const replace = str.replace(/(=.*)x/, (`$1(x+${left})+${top}`))
             const arr = replace.split('=')
-            const right = arr[1]
+            const right = this.getEqualsRight(replace)
             arr[1] = nerdamer(`simplify(${right})`).toString().replace('*', '')
             return arr.join('=')
         } else {
@@ -179,6 +205,12 @@ class Func extends CalculusSet {
         return (a + b) / 2
     }
     getGeoMean(a, b) {
+
+        if (isNaN(a) || isNaN(b)) {
+            const str = nerdamer(`sqrt(${a} * ${b})`).evaluate().toString();
+            return str.includes('/') ? eval(str) : +str
+
+        }
         if (a > 0 && b > 0) {
             return Math.sqrt(a * b)
         }

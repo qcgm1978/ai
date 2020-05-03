@@ -1,6 +1,14 @@
 const { Func } = require('../mathematics/function/function')
 const func = new Func()
 it(``, () => {
+    expect(func.isMeanInequality('y=4x/(x^2+1)', { a: 'x/4', b: '1/(4*x)' })).toBeTruthy()
+    expect(func.calcMin('y=4x/(x^2+1)', { a: 'x/4', b: '1/(4*x)' })).toBe(.5)
+    expect(func.isMeanInequality('y=abs(tan(x)+cot(x))', { a: 'tan(x)', b: 'cot(x)', val: 'pi/4' })).toBeTruthy()
+    expect(func.isMeanInequality('y=x+1/x', { a: 'x' })).toBeFalsy()
+    expect(func.isMeanInequality('y=(x^2+3)/sqrt(x^2+2)', { a: 'sqrt(x^2+2)' })).toBeFalsy()
+    expect(func.isMeanInequality('y=(sin(x))^2*(cos(x))^2+1/((sin(x))^2*(cos(x))^2)', { a: '(sin(x))^2*(cos(x))^2' })).toBeFalsy()
+});
+it(``, () => {
     expect(func.solveInverseSymmetryPoint({ x: '-m/2', y: 1 / 2 })).toBe(-1)
     expect(func.getHyperbolaRange('y=(x+c)/(x+1)', ['x!=-1'], 't')).toEqual("determined by c")
     expect(func.getHyperbolaRange('y=t/2+2/t', [-1, 1], 't')).toEqual([[-Infinity, -2.5], [2.5, Infinity]])
