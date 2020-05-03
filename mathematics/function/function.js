@@ -33,10 +33,16 @@ class Func extends CalculusSet {
 
         const special = this.getLimit(expression)
         if (isNaN(special)) {
-            return sols
-        } else {
+            if (sols.includes(NaN)) {
+                const otherVar = expression.replace(/x|y/g, '').match(/\w+/g)[0]
+                return `determined by ${otherVar}`
+            } else {
 
-            const sort = [...sols, special].sort((a, b) => a > b ? 1 : -1).concat([Infinity]);
+                return sols
+            }
+        } else {
+            const allSpecial = [...new Set([...sols, special, Infinity, -Infinity])]
+            const sort = allSpecial.sort((a, b) => a > b ? 1 : -1)
 
             return sort.reduce((acc, item, index) => {
                 if (index % 2) {

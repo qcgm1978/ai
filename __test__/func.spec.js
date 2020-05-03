@@ -2,6 +2,8 @@ const { Func } = require('../mathematics/function/function')
 const func = new Func()
 it(``, () => {
     expect(func.solveInverseSymmetryPoint({ x: '-m/2', y: 1 / 2 })).toBe(-1)
+    expect(func.getHyperbolaRange('y=(x+c)/(x+1)', ['x!=-1'], 't')).toEqual("determined by c")
+    expect(func.getHyperbolaRange('y=t/2+2/t', [-1, 1], 't')).toEqual([[-Infinity, -2.5], [2.5, Infinity]])
 });
 it(``, () => {
     expect(func.getRange('(ax+b)/(cx+d)')).toBe('y!=a/c')
