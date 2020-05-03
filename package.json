@@ -4,7 +4,7 @@
   "description": "",
   "main": "class.js",
   "scripts": {
-    "test": "jest --watch --silent ",
+    "test": "jest --watch --silent --runInBand",
     "start": "vue serve",
     "git": "git config --global user.name \"Philipp\""
   },

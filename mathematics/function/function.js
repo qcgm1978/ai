@@ -21,9 +21,14 @@ class Func extends CalculusSet {
         return enableNegtive && sameSign && enablEqual
         return enablEqual
     }
-    calcMin(str, { a, b } = {}) {
+    getConjugateRange(str, { a, b, isNegative = false } = {}) {
+        const min = this.calcMin(str, { a, b, isNegative })
+        return [-Infinity, min]
+    }
+    calcMin(str, { a, b, isNegative = false } = {}) {
         if (this.isMeanInequality(str, { a, b })) {
-            return this.getGeoMean(a, b) * 2
+            const min = this.getGeoMean(a, b) * 2
+            return isNegative ? -min : min
         }
     }
     solveInverseSymmetryPoint({ x, y, variable = 'm' }) {
@@ -39,6 +44,7 @@ class Func extends CalculusSet {
     changeVar(expression, variable) {
         return expression.split(variable).join('t')
     }
+
     getHyperbolaRange(expression, range, variable = 'x') {
         const sols = range.map(item => {
             const equation = /=/.test(expression) ? expression : `${variable}=${expression}`;
@@ -48,6 +54,10 @@ class Func extends CalculusSet {
                 sol = this.solveEquations({ equations: [equation, `${variable}=${item}`], variable: 'y' })
             } catch (e) {
                 sol = +e.message.match(/(.+?)\s/)[1]
+                // if (isNaN(sol)) {
+                //     throw new Error(e)
+                // }
+
             }
             return +sol.toFixed(2)
         })
@@ -65,7 +75,7 @@ class Func extends CalculusSet {
             const allSpecial = [...new Set([...sols, special, Infinity, -Infinity])]
             const sort = allSpecial.sort((a, b) => a > b ? 1 : -1)
 
-            return sort.reduce((acc, item, index) => {
+            const group = sort.reduce((acc, item, index) => {
                 if (index % 2) {
                 } else {
                     acc.push([])
@@ -74,6 +84,7 @@ class Func extends CalculusSet {
                 acc[acc.length - 1].push(item)
                 return acc
             }, [])
+            return group.filter(item => item.length === 2)
         }
     }
     getLimit(str) {
