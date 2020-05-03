@@ -5,6 +5,10 @@ class Func extends CalculusSet {
     constructor() {
         super()
     }
+    solveInverseSymmetryPoint({ x, y, variable = 'm' }) {
+        return +nerdamer.solve(`${x} = ${y}`, variable).toString().slice(1, -1)
+        // return +nerdamer(`solve(${x} = ${y},${variable})`).toString().slice(1, -1)
+    }
     inverseSolution(str, variable = 'sin(x)') {
         const solve = str.split(variable).join('x')
         const toStr = nerdamer(`solve(${solve}, x)`).toString();

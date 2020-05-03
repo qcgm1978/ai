@@ -1,6 +1,9 @@
 const { Func } = require('../mathematics/function/function')
 const func = new Func()
 it(``, () => {
+    expect(func.solveInverseSymmetryPoint({ x: '-m/2', y: 1 / 2 })).toBe(-1)
+});
+it(``, () => {
     expect(func.getRange('(ax+b)/(cx+d)')).toBe('y!=a/c')
     const equation = 'y=(x+1)/(2*x-2)';
     expect(func.getDefineDomain(equation)).toBe('x!=1')
