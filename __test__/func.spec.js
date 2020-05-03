@@ -1,9 +1,10 @@
 const { Func } = require('../mathematics/function/function')
 const func = new Func()
-it(``, () => {
+
+it(`Conjugate`, () => {
     expect(func.calcMin('y=x+16/x', { a: 'x', b: '16/x', isNegative: true })).toBe(-8)
     expect(func.getConjugateRange('y=x+16/x', { a: 'x', b: '16/x', isNegative: true })).toEqual([-Infinity, -8])
-
+    expect(func.getConjugateRange('y=x+3/x', { a: 'x', b: '3/x' })).toEqual([3.46, Infinity]);
 });
 it(``, () => {
     expect(func.isMeanInequality('y=4x/(x^2+1)', { a: 'x/4', b: '1/(4*x)' })).toBeTruthy()

@@ -22,8 +22,8 @@ class Func extends CalculusSet {
         return enablEqual
     }
     getConjugateRange(str, { a, b, isNegative = false } = {}) {
-        const min = this.calcMin(str, { a, b, isNegative })
-        return [-Infinity, min]
+        const num = +this.calcMin(str, { a, b, isNegative }).toFixed(2)
+        return isNegative ? [-Infinity, num] : [num, Infinity]
     }
     calcMin(str, { a, b, isNegative = false } = {}) {
         if (this.isMeanInequality(str, { a, b })) {

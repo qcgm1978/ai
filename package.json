@@ -4,7 +4,7 @@
   "description": "",
   "main": "class.js",
   "scripts": {
-    "test": "jest --watch --silent --runInBand",
+    "test": "jest --watch --silent  --runInBand",
     "start": "vue serve",
     "git": "git config --global user.name \"Philipp\""
   },
@@ -30,12 +30,13 @@
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.9.0",
     "@types/jest": "^24.0.25",
-    "jest": "^24.9.0",
+    "jest": "^22.4.4",
     "jest-chain": "^1.1.2",
     "three": "^0.114.0",
     "ts-jest": "^25.1.0"
   },
   "jest": {
+    "testEnvironment": "node",
     "setupFilesAfterEnv": [
       "jest-chain"
     ],
@@ -43,10 +44,7 @@
       "^.+\\.tsx?$": "ts-jest"
     },
     "moduleFileExtensions": [
-      "ts",
-      "tsx",
       "js",
-      "jsx",
       "json",
       "node"
     ]
