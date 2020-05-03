@@ -5,21 +5,52 @@ class Func extends CalculusSet {
     constructor() {
         super()
     }
-    inverseSolution(str) {
-        const solve = str.split('sin(x)').join('x')
+    inverseSolution(str, variable = 'sin(x)') {
+        const solve = str.split(variable).join('x')
         const toStr = nerdamer(`solve(${solve}, x)`).toString();
 
         return (toStr).slice(1, -1);
     }
-    changeVar(str, range) {
+    changeVar(expression, variable) {
+        return expression.split(variable).join('t')
+    }
+    getHyperbolaRange(expression, range, variable = 'x') {
         const sols = range.map(item => {
-            const sol = this.solveEquations({ equations: [`x=${str}`, `x=${item}`], variable: 'y' })
+            const equation = /=/.test(expression) ? expression : `${variable}=${expression}`;
+            let sol = 0
+            try {
+
+                sol = this.solveEquations({ equations: [equation, `${variable}=${item}`], variable: 'y' })
+            } catch (e) {
+                sol = +e.message.match(/(.+?)\s/)[1]
+            }
             return +sol.toFixed(2)
         })
-        return `${sols[0]}<y<${sols[1]}`
+
+        const special = this.getLimit(expression)
+        if (isNaN(special)) {
+            return sols
+        } else {
+
+            const sort = [...sols, special].sort((a, b) => a > b ? 1 : -1).concat([Infinity]);
+
+            return sort.reduce((acc, item, index) => {
+                if (index % 2) {
+                } else {
+                    acc.push([])
+
+                }
+                acc[acc.length - 1].push(item)
+                return acc
+            }, [])
+        }
+    }
+    getLimit(str) {
+        str = /=/.test(str) ? str.split('=')[1] : str
+        var x = nerdamer(`limit(${str},t,${Infinity})`);
+        return +(x.toString());
     }
     getSpecialPoint(str) {
-        const [left, right] = str.split('=')
         const sol = nerdamer.solveEquations([str, 'x=0']);
 
         const xy = sol.map(item => item[1]).join(',');

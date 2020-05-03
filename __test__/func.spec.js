@@ -8,9 +8,13 @@ it(``, () => {
 
     expect(func.getSpecialPoint(equation)).toBe('(0,-0.5)')
     const inverse = "(-4+2*y)*(3+y)^(-1)";
-
+    const changeVar = "y=(1+x^2)/(1-x^2)"
     expect(func.inverseSolution('y=(4+3*sin(x))/(2-sin(x))')).toBe(inverse)
-    expect(func.changeVar(inverse, [-1, 1])).toBe("0.33<y<7")
+    expect(func.getHyperbolaRange(inverse, [-1, 1])).toEqual([0.33, 7])
+    const changedVar = "y=(1+t)/(1-t)";
+
+    expect(func.changeVar(changeVar, 'x^2')).toBe(changedVar)
+    expect(func.getHyperbolaRange(changedVar, [0, Number.MAX_VALUE], 't')).toEqual([[-Infinity, -1], [1, Infinity]])
 });
 it(``, () => {
     const str = 'y=2x+1'
