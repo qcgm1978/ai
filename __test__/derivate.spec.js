@@ -1,6 +1,10 @@
 const { Func } = require('../mathematics/function/function')
 const func = new Func()
 it(``, () => {
+    str = 'mx^2-4mx+4=0'
+    expect(func.getEquivalentEquation(str, 2)).toBe('x^2-4x+4*m^(-1)=0')
+});
+it(``, () => {
     const str = 'f(x)=-2*x^3+(b-3)*x^2+c*x'
     expect(func.getOddFuncCoef(str)).toEqual({ b: 3 })
     const derivate = "-6*x^2+6*x+c";

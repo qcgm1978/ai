@@ -5,6 +5,23 @@ class Func extends CalculusSet {
     constructor() {
         super()
     }
+    getEquivalentEquation(str) {
+        const regs = [/(\d)(x)/g, /(\w)(x)/g, /(\d)(\w)/g]
+        const mul = regs.reduce((acc, item) => acc.replace(item, '$1*$2'), str)
+        const arr = this.getEqualsParts(mul)
+        const items = arr[0].match(/[+-]?[^+-]+/g)
+        const quadraticCoef = items[0].match(/([1-9a-zA-Z]+)\*?x/)[1]
+        const division = items.slice(1).map(item => {
+            return nerdamer.simplify(`${item}/${quadraticCoef}`).toString()
+        });
+
+        const join = division.join('+');
+        return `x^2${join.replace('*', '')}=0`
+    }
+    getEqualsParts(equation) {
+        const arr = equation.split('=')
+        return arr
+    }
     getDerivateMax(derivate, range, extremum) {
         const c = this.getNumberLine(derivate, extremum);
         const expression = this.evaluate(derivate, { c })
@@ -167,10 +184,10 @@ class Func extends CalculusSet {
             return `y!=${coefNumerator}/${coefDenominator}`
         }
     }
-    getCoef(str) {
+    getCoef(str, isAll = false) {
         const coef = str.match(/([1-9a-zA-Z]+)\*?x/);
 
-        return coef ? coef[1] : 1
+        return isAll ? coef : (coef ? coef[1] : 1)
     }
     isExplicitFunction(str) {
         return /y=/.test(str)
