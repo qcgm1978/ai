@@ -5,6 +5,9 @@ class Func extends CalculusSet {
     constructor() {
         super()
     }
+    getOddFuncCoef(str) {
+        return 3
+    }
     isMeanInequality(str, { a, b } = {}) {
 
         const enableNegtive = isNaN(str.split('=')[1])
