@@ -5,12 +5,24 @@ class Func extends CalculusSet {
     constructor() {
         super()
     }
-    evaluate(str, obj) {
-        const expression = nerdamer(str).evaluate(obj).toString();
+    getDerivateMax(derivate, range, extremum) {
+        const c = this.getNumberLine(derivate, extremum);
+        const expression = this.evaluate(derivate, { c })
+        const values = range.map(item => +this.evaluate(expression, item))
+        return Math.max(...values)
+    }
+    evaluate(str, value) {
+        const config = value instanceof Object ? value : { x: value };
+
+        const expression = nerdamer(str).evaluate(config).toString();
         return expression
     }
-    getNumberLine(devirate, variable) {
-        return this.solveEquations({ equations: [`${devirate}=0`, `x=${variable}`], variable: 'c' })
+    getRoots(str, obj) {
+        const expression = nerdamer(str).evaluate(obj).toString();
+        return eval(nerdamer.solve(expression, 'x').toString())
+    }
+    getNumberLine(derivate, variable) {
+        return this.solveEquations({ equations: [`${derivate}=0`, `x=${variable}`], variable: 'c' })
     }
     getDifferentiate(str) {
         const right = this.getEqualsRight(str)

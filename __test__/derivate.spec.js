@@ -9,5 +9,8 @@ it(``, () => {
     const c = func.getNumberLine(derivate, -1);
 
     expect(c).toEqual(12)
-    expect(func.evaluate(derivate, { c: 12 })).toBe("-6*x^2+6*x+12")
+    const roots = func.getRoots(derivate, { c: 12 });
+
+    expect(roots).toEqual([-1, 2])
+    expect(func.getDerivateMax(derivate, [-3, 3], -1)).toEqual(-24)
 });
