@@ -5,8 +5,32 @@ class Func extends CalculusSet {
     constructor() {
         super()
     }
-    getOddFuncCoef(str) {
-        return 3
+    getOddFuncCoef(str, isOdd = true) {
+        const right = this.getEqualsRight(str)
+        const coefs = right.match(/([-.1-9a-zA-Z]*)\)?x(\^(\d+))?/g).map(item => item.split('x'))
+        const format = coefs.map(item => {
+            return item.map(it => {
+                let str = it.replace(/\)|\^/, '')
+                if (str === '') {
+                    str = '1'
+                }
+                if (!isNaN(str)) {
+                    str = +str
+                }
+                return str
+            })
+        })
+        let arr = []
+        if (isOdd) {
+            arr = format.filter(item => !(item[1] % 2))
+        }
+        const oddPowerCoefs = arr.map(item => item[0]);
+
+        return oddPowerCoefs.reduce((acc, item) => {
+            const variable = item.match(/\w+/)[0]
+            const sol = nerdamer.solve(item, variable)
+            return { ...acc, [variable]: +sol.toString().slice(1, -1) }
+        }, {})
     }
     isMeanInequality(str, { a, b } = {}) {
 
