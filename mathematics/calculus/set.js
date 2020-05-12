@@ -29,6 +29,9 @@ class CalculusSet extends Set {
         return this.solveEquations({ equations: [`x-y=${this.interval[0]}`, `x+y=${this.interval[1]}`], variable: 'x' })
     }
     solveEquations({ equations = [], variable, isAll = false }) {
+        if (arguments[0] instanceof Array) {
+            var [equations, variable, isAll] = arguments
+        }
         var sol = nerdamer.solveEquations(equations);
         if (isAll) {
             return sol

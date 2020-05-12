@@ -5,9 +5,25 @@ class Func extends CalculusSet {
     constructor() {
         super()
     }
-    getEquivalentEquation(str) {
+    pbs = 'b^2-4ac'
+    getRootsPbs(equation, rootsNum) {// pbs: 根判别式
+        const [a, b, c] = this.getCoef(equation)
+        return nerdamer(this.pbs).evaluate().toString()
+    }
+    substituteEquation({ equation, val, funcVal, Comparison }) {
+        // const left = this.getEqualsParts()[0]
+        const substitution = equation.includes('=') ? equation : `${equation}=${funcVal}`;
+
+        const sol = this.solveEquations([substitution, `x=${val}`])
+        return `x${Comparison}${+sol.toFixed(2)}`
+    }
+    formatEquation(equation) {
         const regs = [/(\d)(x)/g, /(\w)(x)/g, /(\d)(\w)/g]
-        const mul = regs.reduce((acc, item) => acc.replace(item, '$1*$2'), str)
+        const mul = regs.reduce((acc, item) => acc.replace(item, '$1*$2'), equation)
+        return mul
+    }
+    getEquivalentEquation(str) {
+        const mul = this.formatEquation(str)
         const arr = this.getEqualsParts(mul)
         const items = arr[0].match(/[+-]?[^+-]+/g)
         const quadraticCoef = items[0].match(/([1-9a-zA-Z]+)\*?x/)[1]
